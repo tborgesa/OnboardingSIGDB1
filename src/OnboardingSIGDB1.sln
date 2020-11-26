@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.Data", "On
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.IOC", "OnboardingSIGDB1.IOC\OnboardingSIGDB1.IOC.csproj", "{D3FA5E01-2A30-4E83-A9FB-F46B80236980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.Test", "OnboardingSIGDB1.Test\OnboardingSIGDB1.Test.csproj", "{9BD21F71-6B0F-4AC8-BB38-D251C8B73F84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.Domain.Test", "OnboardingSIGDB1.Test\OnboardingSIGDB1.Domain.Test.csproj", "{9BD21F71-6B0F-4AC8-BB38-D251C8B73F84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
