@@ -33,11 +33,12 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
 
             RuleFor(_ => _.Cnpj)
                 .Must(DeveSerCnpjValido)
-                .WithMessage(EmpresaResources.CnpjInvalido);
+                .WithMessage(Resource.FormatarResource(Resource.MensagemDeCampoInvalido,EmpresaResources.Cnpj));
 
             RuleFor(_ => _.DataDeFundacao)
                 .Must(_ => _ > DateTime.MinValue)
-                .When(_ => _.DataDeFundacao != null);
+                .When(_ => _.DataDeFundacao != null)
+                .WithMessage(Resource.FormatarResourceToLowerValor2(Resource.MensagemDeCampoInvalido, EmpresaResources.DataDeFundacao));
 
             ValidationResult = Validate(this);
             return ValidationResult.IsValid;
