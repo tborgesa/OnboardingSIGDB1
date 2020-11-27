@@ -5,7 +5,7 @@ using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using System;
 
-namespace OnboardingSIGDB1.Domain.Empresas
+namespace OnboardingSIGDB1.Domain.Empresas.Entidades
 {
     public class Empresa : Entidade<int, Empresa>
     {

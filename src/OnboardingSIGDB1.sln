@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.2 - OnboardingSIGDB1.IOC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - OnboardingSIGDB1.Test", "04 - OnboardingSIGDB1.Test", "{33BDC3D8-6A70-47F2-8667-6F0E4B021E68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.Api", "OnboardingSIGDB1.Api\OnboardingSIGDB1.Api.csproj", "{1544D372-C3F6-414F-851F-81E02B5ABBE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnboardingSIGDB1.Api", "OnboardingSIGDB1.Api\OnboardingSIGDB1.Api.csproj", "{1544D372-C3F6-414F-851F-81E02B5ABBE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.Domain", "OnboardingSIGDB1.Domain\OnboardingSIGDB1.Domain.csproj", "{F6C7FB43-8D10-4750-8B94-63899904E92D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnboardingSIGDB1.Domain", "OnboardingSIGDB1.Domain\OnboardingSIGDB1.Domain.csproj", "{F6C7FB43-8D10-4750-8B94-63899904E92D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.Data", "OnboardingSIGDB1.Data\OnboardingSIGDB1.Data.csproj", "{8E8D3D2D-B3AC-4615-8EDD-F572D8D5DC10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnboardingSIGDB1.Data", "OnboardingSIGDB1.Data\OnboardingSIGDB1.Data.csproj", "{8E8D3D2D-B3AC-4615-8EDD-F572D8D5DC10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.IOC", "OnboardingSIGDB1.IOC\OnboardingSIGDB1.IOC.csproj", "{D3FA5E01-2A30-4E83-A9FB-F46B80236980}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnboardingSIGDB1.IOC", "OnboardingSIGDB1.IOC\OnboardingSIGDB1.IOC.csproj", "{D3FA5E01-2A30-4E83-A9FB-F46B80236980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnboardingSIGDB1.Domain.Test", "OnboardingSIGDB1.Domain.Test\OnboardingSIGDB1.Domain.Test.csproj", "{9BD21F71-6B0F-4AC8-BB38-D251C8B73F84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnboardingSIGDB1.Domain.Test", "OnboardingSIGDB1.Domain.Test\OnboardingSIGDB1.Domain.Test.csproj", "{9BD21F71-6B0F-4AC8-BB38-D251C8B73F84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

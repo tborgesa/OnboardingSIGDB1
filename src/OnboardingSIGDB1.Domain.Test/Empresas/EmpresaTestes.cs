@@ -1,19 +1,19 @@
-﻿using OnboardingSIGDB1.Domain.Test.Common;
-using System;
-using Xunit;
+﻿using Bogus;
 using Bogus.Extensions.Brazil;
 using OnboardingSIGDB1.Domain._Base.Helpers;
-using OnboardingSIGDB1.Domain.Empresas;
+using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Test.Builders;
-using Bogus;
+using OnboardingSIGDB1.Domain.Test.Common;
+using System;
+using Xunit;
 
 namespace OnboardingSIGDB1.Domain.Test.Empresas
 {
     public class EmpresaTestes
     {
-        private static string _nome;
-        private static string _cnpj;
-        private static DateTime? _dataDeFundacao;
+        private readonly string _nome;
+        private readonly string _cnpj;
+        private readonly DateTime? _dataDeFundacao;
         private readonly Faker _fake;
 
         public EmpresaTestes()
