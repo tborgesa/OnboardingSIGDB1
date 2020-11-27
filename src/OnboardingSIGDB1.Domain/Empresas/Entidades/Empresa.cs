@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using OnboardingSIGDB1.Domain._Base;
 using OnboardingSIGDB1.Domain._Base.Entidades;
 using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Resources;

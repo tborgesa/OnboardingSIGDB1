@@ -32,7 +32,7 @@ namespace OnboardingSIGDB1.Domain._Base.Notification
 
         public Task HandleNotificacaoDeDominioAsync(string mensagem)
         {
-            _notifications.Add(new DomainNotification(TipoDeNotificacao.ErroDeDominio.ToString(),mensagem));
+            _notifications.Add(new DomainNotification(TipoDeNotificacao.ErroDeDominio.ToString(), mensagem));
             return Task.CompletedTask;
         }
 
