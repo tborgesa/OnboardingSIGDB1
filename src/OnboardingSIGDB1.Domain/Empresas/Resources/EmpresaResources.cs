@@ -1,4 +1,4 @@
-﻿namespace OnboardingSIGDB1.Domain._Base.Resources
+﻿namespace OnboardingSIGDB1.Domain.Empresas.Resources
 {
     public static class EmpresaResources
     {

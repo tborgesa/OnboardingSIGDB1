@@ -2,6 +2,7 @@
 using OnboardingSIGDB1.Domain._Base.Entidades;
 using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Resources;
+using OnboardingSIGDB1.Domain.Empresas.Resources;
 using System;
 
 namespace OnboardingSIGDB1.Domain.Empresas.Entidades

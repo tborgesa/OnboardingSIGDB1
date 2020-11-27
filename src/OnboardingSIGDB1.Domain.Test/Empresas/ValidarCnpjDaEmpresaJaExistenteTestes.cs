@@ -4,6 +4,7 @@ using Moq;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
+using OnboardingSIGDB1.Domain.Empresas.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Services;
 using OnboardingSIGDB1.Domain.Test.Builders;
 using OnboardingSIGDB1.Domain.Test.Common;

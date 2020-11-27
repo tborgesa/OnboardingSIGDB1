@@ -45,16 +45,6 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         }
 
         [Theory]
-        [InlineData(151)]
-        public void NaoDeveAceitarNomeComQuantidadeCaracterInavalido(int quantidadeDeCaracteres)
-        {
-            var nomeInvalido = _fake.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
-            var empresa = EmpresaBuilder.Novo().ComNome(nomeInvalido).Build();
-
-            Assert.False(empresa.Validar());
-        }
-
-        [Theory]
         [InlineData("")]
         [InlineData(null)]
         public void NaoDeveAceitarCnpjNuloOuVazio(string cnpj)
@@ -62,6 +52,33 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             var empresa = EmpresaBuilder.Novo().ComCnpj(cnpj).Build();
 
             Assert.False(empresa.Validar());
+        }
+
+        [Theory]
+        [InlineData(151)]
+        public void NaoDeveAceitarNomeComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
+        {
+            var nomeInvalido = _fake.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
+            var empresa = EmpresaBuilder.Novo().ComNome(nomeInvalido).Build();
+
+            Assert.False(empresa.Validar());
+        }
+
+        [Fact]
+        public void NaoDeveAceitarDataDeFundacaoComADataMinima()
+        {
+            var dataInvalida = DateTime.MinValue;
+            var empresa = EmpresaBuilder.Novo().ComDataDeFundacao(dataInvalida).Build();
+
+            Assert.False(empresa.Validar());
+        }
+
+        [Fact]
+        public void DeveAceitarDataDeFundacaoSemInformacao()
+        {
+            var empresa = EmpresaBuilder.Novo().ComDataDeFundacao(null).Build();
+
+            Assert.True(empresa.Validar());
         }
 
         [Fact]
@@ -100,21 +117,5 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             Assert.False(empresa.Validar());
         }
 
-        [Fact]
-        public void NaoDeveAceitarDataDeFundacaoComADataMinima()
-        {
-            var dataInvalida = DateTime.MinValue;
-            var empresa = EmpresaBuilder.Novo().ComDataDeFundacao(dataInvalida).Build();
-
-            Assert.False(empresa.Validar());
-        }
-
-        [Fact]
-        public void DeveAceitarDataDeFundacaoSemInformacao()
-        {
-            var empresa = EmpresaBuilder.Novo().ComDataDeFundacao(null).Build();
-
-            Assert.True(empresa.Validar());
-        }
     }
 }
