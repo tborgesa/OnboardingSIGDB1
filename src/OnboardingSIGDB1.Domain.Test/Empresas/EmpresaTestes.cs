@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Bogus.Extensions.Brazil;
 using OnboardingSIGDB1.Domain._Base.Helpers;
+using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Test.Builders;
 using OnboardingSIGDB1.Domain.Test.Common;
@@ -14,14 +15,14 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         private readonly string _nome;
         private readonly string _cnpj;
         private readonly DateTime? _dataDeFundacao;
-        private readonly Faker _fake;
+        private readonly Faker _faker;
 
         public EmpresaTestes()
         {
-            _fake = FakerBuilder.Novo().Build();
-            _nome = _fake.Lorem.Random.AlphaNumeric(150);
-            _cnpj = _fake.Company.Cnpj();
-            _dataDeFundacao = _fake.Date.Recent(365);
+            _faker = FakerBuilder.Novo().Build();
+            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150);
+            _cnpj = _faker.Company.Cnpj();
+            _dataDeFundacao = _faker.QualquerDataUltimoAno();
         }
 
         [Fact]
@@ -55,10 +56,10 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         }
 
         [Theory]
-        [InlineData(151)]
+        [InlineData(Constantes.QuantidadeDeCaracteres151)]
         public void NaoDeveAceitarNomeComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
-            var nomeInvalido = _fake.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
+            var nomeInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
             var empresa = EmpresaBuilder.Novo().ComNome(nomeInvalido).Build();
 
             Assert.False(empresa.Validar());
@@ -84,7 +85,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Fact]
         public void NaoDeveAceitarCnpjComTamanhoInvalido()
         {
-            var cnpjInvalido = _fake.Random.Number(13).ToString();
+            var cnpjInvalido = _faker.Random.Number(13).ToString();
             var empresa = EmpresaBuilder.Novo().ComCnpj(cnpjInvalido).Build();
 
             Assert.False(empresa.Validar());

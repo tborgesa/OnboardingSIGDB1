@@ -1,23 +1,21 @@
 ﻿using Bogus;
-using OnboardingSIGDB1.Domain.Cargos;
+using OnboardingSIGDB1.Domain._Base.Resources;
+using OnboardingSIGDB1.Domain.Cargos.Entidades;
 using OnboardingSIGDB1.Domain.Test.Builders;
 using OnboardingSIGDB1.Domain.Test.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace OnboardingSIGDB1.Domain.Test.Cargos
 {
     public class CargoTestes
     {
-        private readonly Faker _fake;
+        private readonly Faker _faker;
         private readonly string _descricao;
 
         public CargoTestes()
         {
-            _fake = FakerBuilder.Novo().Build();
-            _descricao = _fake.Lorem.Random.AlphaNumeric(250);
+            _faker = FakerBuilder.Novo().Build();
+            _descricao = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres250);
         }
 
         [Fact]
@@ -39,10 +37,10 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
         }
 
         [Theory]
-        [InlineData(251)]
+        [InlineData(Constantes.QuantidadeDeCaracteres251)]
         public void NaoDeveAceitarDescricaoComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
-            var descricaoInvalido = _fake.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
+            var descricaoInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
             var empresa = CargoBuilder.Novo().ComDescricao(descricaoInvalido).Build();
 
             Assert.False(empresa.Validar());

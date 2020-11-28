@@ -3,10 +3,10 @@ using FluentValidation.Results;
 
 namespace OnboardingSIGDB1.Domain._Base.Entidades
 {
-    public abstract class Entidade<TId, TEntity> :
-        AbstractValidator<TEntity>
+    public abstract class Entidade<TId, TEntidade> :
+        AbstractValidator<TEntidade>
         where TId : struct
-        where TEntity : Entidade<TId, TEntity>
+        where TEntidade : Entidade<TId, TEntidade>
     {
         public TId Id { get; protected set; }
 

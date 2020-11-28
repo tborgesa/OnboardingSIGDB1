@@ -12,7 +12,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
 
         public ValidadorCpfDaFuncionarioJaExistente(
-            IDomainNotificationHandlerAsync notificacaoDeDominio,
+            IDomainNotificationHandler notificacaoDeDominio,
             IFuncionarioRepositorio funcionarioRepositorio) : base(notificacaoDeDominio)
         {
             _funcionarioRepositorio = funcionarioRepositorio;

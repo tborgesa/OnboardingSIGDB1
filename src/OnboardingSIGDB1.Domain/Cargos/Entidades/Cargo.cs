@@ -2,7 +2,7 @@
 using OnboardingSIGDB1.Domain._Base.Entidades;
 using OnboardingSIGDB1.Domain._Base.Resources;
 
-namespace OnboardingSIGDB1.Domain.Cargos
+namespace OnboardingSIGDB1.Domain.Cargos.Entidades
 {
     public class Cargo : Entidade<int, Cargo>
     {

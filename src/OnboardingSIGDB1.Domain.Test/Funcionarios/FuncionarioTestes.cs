@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Bogus.Extensions.Brazil;
 using OnboardingSIGDB1.Domain._Base.Helpers;
+using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using OnboardingSIGDB1.Domain.Test.Builders;
 using OnboardingSIGDB1.Domain.Test.Common;
@@ -14,14 +15,14 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         private readonly string _nome;
         private readonly string _cpf;
         private readonly DateTime? _dataDeContratacao;
-        private readonly Faker _fake;
+        private readonly Faker _faker;
 
         public FuncionarioTestes()
         {
-            _fake = FakerBuilder.Novo().Build();
-            _nome = _fake.Lorem.Random.AlphaNumeric(150);
-            _cpf = _fake.Person.Cpf();
-            _dataDeContratacao = _fake.Date.Recent(365);
+            _faker = FakerBuilder.Novo().Build();
+            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150);
+            _cpf = _faker.Person.Cpf();
+            _dataDeContratacao = _faker.QualquerDataUltimoAno();
         }
 
         [Fact]
@@ -55,10 +56,10 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         }
 
         [Theory]
-        [InlineData(151)]
+        [InlineData(Constantes.QuantidadeDeCaracteres151)]
         public void NaoDeveAceitarNomeComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
-            var nomeInvalido = _fake.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
+            var nomeInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
             var funcionario = FuncionarioBuilder.Novo().ComNome(nomeInvalido).Build();
 
             Assert.False(funcionario.Validar());
@@ -84,7 +85,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         [Fact]
         public void NaoDeveAceitarCpfComTamanhoInvalido()
         {
-            var cpfInvalido = _fake.Random.Number(10).ToString();
+            var cpfInvalido = _faker.Random.Number(10).ToString();
             var funcionario = FuncionarioBuilder.Novo().ComCpf(cpfInvalido).Build();
 
             Assert.False(funcionario.Validar());

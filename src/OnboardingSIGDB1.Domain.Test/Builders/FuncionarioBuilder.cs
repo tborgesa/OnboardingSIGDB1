@@ -1,4 +1,5 @@
 ﻿using Bogus.Extensions.Brazil;
+using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using OnboardingSIGDB1.Domain.Test.Common;
@@ -15,11 +16,11 @@ namespace OnboardingSIGDB1.Domain.Test.Builders
 
         public static FuncionarioBuilder Novo()
         {
-            var fake = FakerBuilder.Novo().Build();
+            var faker = FakerBuilder.Novo().Build();
 
-            _nome = fake.Lorem.Random.AlphaNumeric(150);
-            _cpf = fake.Person.Cpf();
-            _dataDeContratacao = fake.Date.Recent(365);
+            _nome = faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150);
+            _cpf = faker.Person.Cpf();
+            _dataDeContratacao = faker.QualquerDataUltimoAno();
 
             return new FuncionarioBuilder();
         }

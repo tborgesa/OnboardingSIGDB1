@@ -17,23 +17,25 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
     {
         private readonly Mock<IFuncionarioRepositorio> _funcionarioRepositorio;
         private readonly ValidadorCpfDaFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;
-        private readonly Mock<IDomainNotificationHandlerAsync> _notificacaoDeDominioMock;
+        private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
 
         private readonly string _cpf;
-        private const int _id = 1;
-        private readonly Faker _fake;
+        private int _id;
+        private readonly Faker _faker;
         private readonly string _erroEsperado;
 
         public ValidarCpfDaFuncionarioJaExistenteTestes()
         {
-            _fake = FakerBuilder.Novo().Build();
-            _cpf = _fake.Person.Cpf();
+            _faker = FakerBuilder.Novo().Build();
+
+            _id = _faker.Id();
+            _cpf = _faker.Person.Cpf();
             _erroEsperado = Resource.FormatarResourceToLowerValor2(
                 Resource.MensagemJaExisteCadastrada,
                 FuncionarioResources.Funcionario, FuncionarioResources.Cpf);
 
             _funcionarioRepositorio = new Mock<IFuncionarioRepositorio>();
-            _notificacaoDeDominioMock = new Mock<IDomainNotificationHandlerAsync>();
+            _notificacaoDeDominioMock = new Mock<IDomainNotificationHandler>();
             _validadorCpfDaFuncionarioJaExistente = new ValidadorCpfDaFuncionarioJaExistente(
                 _notificacaoDeDominioMock.Object,
                 _funcionarioRepositorio.Object);

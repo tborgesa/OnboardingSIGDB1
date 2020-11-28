@@ -12,7 +12,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
         IEmpresaRepositorio _empresaRepositorio;
 
         public ValidadorCnpjDaEmpresaJaExistente(
-            IDomainNotificationHandlerAsync notificacaoDeDominio,
+            IDomainNotificationHandler notificacaoDeDominio,
             IEmpresaRepositorio empresaRepositorio) : base(notificacaoDeDominio)
         {
             _empresaRepositorio = empresaRepositorio;

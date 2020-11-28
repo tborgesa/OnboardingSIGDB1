@@ -1,8 +1,6 @@
-﻿using OnboardingSIGDB1.Domain.Cargos;
+﻿using OnboardingSIGDB1.Domain._Base.Resources;
+using OnboardingSIGDB1.Domain.Cargos.Entidades;
 using OnboardingSIGDB1.Domain.Test.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnboardingSIGDB1.Domain.Test.Builders
 {
@@ -13,9 +11,9 @@ namespace OnboardingSIGDB1.Domain.Test.Builders
 
         public static CargoBuilder Novo()
         {
-            var fake = FakerBuilder.Novo().Build();
+            var faker = FakerBuilder.Novo().Build();
 
-            _descricao = fake.Lorem.Random.AlphaNumeric(250);
+            _descricao = faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres250);
 
             return new CargoBuilder();
         }

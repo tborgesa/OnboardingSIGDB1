@@ -20,6 +20,21 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
             DataDeFundacao = dataDeFundacao;
         }
 
+        public void AlterarNome(string nome)
+        {
+            Nome = nome;
+        }
+
+        public void AlterarCnpj(string cnpj)
+        {
+            Cnpj = cnpj;
+        }
+
+        public void AlterarDataDeFundacao(DateTime dataDeFundacao)
+        {
+            DataDeFundacao = dataDeFundacao;
+        }
+
         private bool DeveSerCnpjValido(string cnpj)
         {
             return cnpj.ValidarCnpj();
@@ -44,5 +59,6 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
             ValidationResult = Validate(this);
             return ValidationResult.IsValid;
         }
+
     }
 }

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain._Base.Notification
 {
-    public class DomainNotificationHandlerAsync : IDomainNotificationHandlerAsync
+    public class DomainNotificationHandler : IDomainNotificationHandler
     {
         private List<DomainNotification> _notifications;
 
-        public DomainNotificationHandlerAsync()
+        public DomainNotificationHandler()
         {
             _notifications = new List<DomainNotification>();
         }

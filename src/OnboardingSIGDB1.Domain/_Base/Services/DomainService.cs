@@ -7,9 +7,9 @@ namespace OnboardingSIGDB1.Domain._Base.Services
 {
     public abstract class DomainService
     {
-        protected readonly IDomainNotificationHandlerAsync NotificacaoDeDominio;
+        protected readonly IDomainNotificationHandler NotificacaoDeDominio;
 
-        protected DomainService(IDomainNotificationHandlerAsync notificacaoDeDominio)
+        protected DomainService(IDomainNotificationHandler notificacaoDeDominio)
         {
             NotificacaoDeDominio = notificacaoDeDominio;
         }
@@ -17,14 +17,13 @@ namespace OnboardingSIGDB1.Domain._Base.Services
         public async Task NotificarValidacoesDeDominioAsync(ValidationResult validationResult)
         {
             foreach (var erro in validationResult.Errors)
-                await NotificacaoDeDominio.HandleAsync(new DomainNotification(TipoDeNotificacao.ErroDeDominio.ToString(), erro.ErrorMessage));
+                await NotificacaoDeDominio.HandleNotificacaoDeDominioAsync(erro.ErrorMessage);
         }
 
         public async Task QuandoNuloNotificarSobreDominioAsync(object dominio, string nomeDoDominio, string msg)
         {
             if (dominio == null)
-                await NotificacaoDeDominio.HandleAsync(new DomainNotification(TipoDeNotificacao.ErroDeServico.ToString(),
-                    string.Format(msg, nomeDoDominio)));
+                await NotificacaoDeDominio.HandleNotificacaoDeServicoAsync(string.Format(msg, nomeDoDominio));
         }
     }
 }
