@@ -17,7 +17,7 @@ namespace OnboardingSIGDB1.Domain.Cargos.Entidades
             RuleFor(_ => _.Descricao)
                .NotNull()
                .NotEmpty()
-               .MaximumLength(Constantes.QuantidadeDeCaracteres250);
+               .MaximumLength(Constantes.Numero250);
 
             ValidationResult = Validate(this);
             return ValidationResult.IsValid;

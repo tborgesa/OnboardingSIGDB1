@@ -20,7 +20,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         public FuncionarioTestes()
         {
             _faker = FakerBuilder.Novo().Build();
-            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150);
+            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
             _cpf = _faker.Person.Cpf();
             _dataDeContratacao = _faker.QualquerDataUltimoAno();
         }
@@ -56,7 +56,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         }
 
         [Theory]
-        [InlineData(Constantes.QuantidadeDeCaracteres151)]
+        [InlineData(Constantes.Numero151)]
         public void NaoDeveAceitarNomeComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
             var nomeInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);

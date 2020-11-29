@@ -20,7 +20,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         public EmpresaTestes()
         {
             _faker = FakerBuilder.Novo().Build();
-            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150);
+            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
             _cnpj = _faker.Company.Cnpj();
             _dataDeFundacao = _faker.QualquerDataUltimoAno();
         }
@@ -56,7 +56,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         }
 
         [Theory]
-        [InlineData(Constantes.QuantidadeDeCaracteres151)]
+        [InlineData(Constantes.Numero151)]
         public void NaoDeveAceitarNomeComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
             var nomeInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);

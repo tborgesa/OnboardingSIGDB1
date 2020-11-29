@@ -45,7 +45,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
             RuleFor(_ => _.Nome)
                 .NotNull()
                 .NotEmpty()
-                .MaximumLength(Constantes.QuantidadeDeCaracteres150);
+                .MaximumLength(Constantes.Numero150);
 
             RuleFor(_ => _.Cnpj)
                 .Must(DeveSerCnpjValido)

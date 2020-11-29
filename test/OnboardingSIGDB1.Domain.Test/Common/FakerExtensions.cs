@@ -8,12 +8,12 @@ namespace OnboardingSIGDB1.Domain.Test.Common
     {
         public static int Id(this Faker faker)
         {
-           return faker.Random.Int(Constantes.QuantidadeDeCaracteres1, Constantes.QuantidadeDeCaracteres100);
+           return faker.Random.Int(Constantes.Numero1, Constantes.Numero100);
         }
 
         public static DateTime QualquerDataUltimoAno(this Faker faker)
         {
-            return faker.Date.Recent(Constantes.QuantidadeDeCaracteres365);
+            return faker.Date.Recent(Constantes.Numero365);
         }
     }
 }

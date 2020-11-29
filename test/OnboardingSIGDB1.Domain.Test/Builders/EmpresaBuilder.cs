@@ -17,7 +17,7 @@ namespace OnboardingSIGDB1.Domain.Test.Builders
         {
             var faker = FakerBuilder.Novo().Build();
 
-            _nome = faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150);
+            _nome = faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
             _cnpj = faker.Company.Cnpj();
             _dataDeFundacao = faker.QualquerDataUltimoAno();
 

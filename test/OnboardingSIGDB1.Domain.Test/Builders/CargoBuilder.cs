@@ -13,7 +13,7 @@ namespace OnboardingSIGDB1.Domain.Test.Builders
         {
             var faker = FakerBuilder.Novo().Build();
 
-            _descricao = faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres250);
+            _descricao = faker.Lorem.Random.AlphaNumeric(Constantes.Numero250);
 
             return new CargoBuilder();
         }

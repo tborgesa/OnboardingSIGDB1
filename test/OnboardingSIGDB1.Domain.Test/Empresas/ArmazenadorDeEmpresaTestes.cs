@@ -34,7 +34,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             _id = _faker.Id();
             _empresaDto = new EmpresaDto
             {
-                Nome = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150),
+                Nome = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150),
                 Cnpj = _faker.Company.Cnpj(),
                 DataDeFundacao = _faker.QualquerDataUltimoAno()
             };
@@ -102,7 +102,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         public async Task DeveEditarONomeDaEmpresa()
         {
             _empresaDto.Id = _faker.Id();
-            var nomeInicial = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres150);
+            var nomeInicial = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
             var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).ComNome(nomeInicial).Build();
 
             _empresaRepositorioMock.Setup(_ => _.ObterPorIdAsync(_empresaDto.Id))

@@ -30,7 +30,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
             RuleFor(_ => _.Nome)
                  .NotNull()
                  .NotEmpty()
-                 .MaximumLength(Constantes.QuantidadeDeCaracteres150);
+                 .MaximumLength(Constantes.Numero150);
 
             RuleFor(_ => _.Cpf)
                 .Must(DeveSerCpfValido)

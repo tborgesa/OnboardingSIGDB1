@@ -15,7 +15,7 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
         public CargoTestes()
         {
             _faker = FakerBuilder.Novo().Build();
-            _descricao = _faker.Lorem.Random.AlphaNumeric(Constantes.QuantidadeDeCaracteres250);
+            _descricao = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero250);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
         }
 
         [Theory]
-        [InlineData(Constantes.QuantidadeDeCaracteres251)]
+        [InlineData(Constantes.Numero251)]
         public void NaoDeveAceitarDescricaoComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
             var descricaoInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
