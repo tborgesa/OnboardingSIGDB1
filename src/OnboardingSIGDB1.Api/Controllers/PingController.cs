@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnboardingSIGDB1.Api._Base.Controller;
+using OnboardingSIGDB1.Api._Base.Controllers;
 
 namespace OnboardingSIGDB1.Api.Controllers
 {

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace OnboardingSIGDB1.Api._Base.Middleware
+namespace OnboardingSIGDB1.Api._Base.Extensions
 {
     public static class SwaggerMiddlewareExtension
     {

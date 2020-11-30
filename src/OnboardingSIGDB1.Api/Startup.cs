@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnboardingSIGDB1.Api._Base.Middleware;
+using OnboardingSIGDB1.Api._Base.Extensions;
 
 namespace OnboardingSIGDB1.Api
 {

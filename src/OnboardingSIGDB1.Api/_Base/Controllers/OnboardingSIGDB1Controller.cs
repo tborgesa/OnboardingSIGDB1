@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace OnboardingSIGDB1.Api._Base.Controller
+namespace OnboardingSIGDB1.Api._Base.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
