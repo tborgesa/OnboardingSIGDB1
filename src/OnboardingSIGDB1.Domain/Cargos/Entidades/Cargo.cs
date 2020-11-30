@@ -22,5 +22,10 @@ namespace OnboardingSIGDB1.Domain.Cargos.Entidades
             ValidationResult = Validate(this);
             return ValidationResult.IsValid;
         }
+
+        public void AlterarDescricao(string descricao)
+        {
+            Descricao = descricao;
+        }
     }
 }
