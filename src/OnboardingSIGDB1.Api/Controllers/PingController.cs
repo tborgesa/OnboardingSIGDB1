@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnboardingSIGDB1.Api._Base.Controller;
 
 namespace OnboardingSIGDB1.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PingController : ControllerBase
+    public class PingController : OnboardingSIGDB1Controller
     {
-        // GET api/values
         [HttpGet]
         public ActionResult<string> Get()
         {
