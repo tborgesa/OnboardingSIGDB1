@@ -43,16 +43,15 @@ namespace OnboardingSIGDB1.Api
                         }
                     });
 
-                string caminhoAplicacao =
-                    PlatformServices.Default.Application.ApplicationBasePath;
-                string nomeAplicacao =
-                    PlatformServices.Default.Application.ApplicationName;
-                string caminhoXmlDoc =
-                    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+                //string caminhoAplicacao =
+                //    PlatformServices.Default.Application.ApplicationBasePath;
+                //string nomeAplicacao =
+                //    PlatformServices.Default.Application.ApplicationName;
+                //string caminhoXmlDoc =
+                //    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
 
-                c.IncludeXmlComments(caminhoXmlDoc);
+                //c.IncludeXmlComments(caminhoXmlDoc);
             });
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
