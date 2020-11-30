@@ -7,10 +7,12 @@ namespace OnboardingSIGDB1.Domain.Test._Comum
 {
     public class OnboardingSIGDB1Faker
     {
+        private readonly string _linguagem;
         public readonly Faker Faker;
 
         public OnboardingSIGDB1Faker(string linguagem)
         {
+            _linguagem = linguagem;
             Faker = new Faker(linguagem);
         }
         public int Id() => Faker.Random.Int(Constantes.Numero1, Constantes.Numero100);
@@ -19,7 +21,7 @@ namespace OnboardingSIGDB1.Domain.Test._Comum
 
         public string Cnpj() => Faker.Company.Cnpj();
 
-        public string Cpf() => Faker.Person.Cpf();
+        public string Cpf() => new Faker(_linguagem).Person.Cpf();
 
         public string FraseComQuantidadeExataDeCaracteres(int quantidade)
         {

@@ -2,7 +2,7 @@
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Interfaces
 {
-    interface IValidadorCpfDaFuncionarioJaExistente
+    public interface IValidadorCpfDaFuncionarioJaExistente
     {
         Task<bool> ValidarAsync(string cpf, int? id = null);
     }

@@ -44,5 +44,20 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
             ValidationResult = Validate(this);
             return ValidationResult.IsValid;
         }
+
+        public void AlterarNome(string nome)
+        {
+            Nome = nome;
+        }
+
+        public void AlterarCpf(string cpf)
+        {
+            Cpf = cpf.RemoverMascaraDoCpf();
+        }
+
+        public void AlterarDataDeContratacao(DateTime dataDeContratacao)
+        {
+            DataDeContratacao = dataDeContratacao;
+        }
     }
 }
