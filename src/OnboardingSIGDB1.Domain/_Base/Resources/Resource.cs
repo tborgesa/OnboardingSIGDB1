@@ -6,7 +6,7 @@
         public const string MensagemJaExisteCadastrado = "Já existe um {0} cadastrado com o {1} informado.";
         public const string MensagemDeCampoInvalido = "O campo {0} deve ser um valor válido.";
 
-        public const string MensagemDeErro500 = "Estamos passando por alguns problemas técnicos.{0}";
+        public const string MensagemDeErro500 = "Estamos passando por alguns problemas técnicos.";
 
         public static string FormatarResource(string valor1, string valor2, string valor3)
         {

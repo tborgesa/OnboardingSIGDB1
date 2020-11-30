@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using System;
+using System.Dynamic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -17,30 +19,32 @@ namespace OnboardingSIGDB1.Api._Base.Middlewares
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IHostingEnvironment env)
+        public async Task Invoke(HttpContext context, IHostingEnvironment ambiente)
         {
             try
             {
                 await _next.Invoke(context);
             }
-            catch (Exception exception)
+            catch (Exception excecao)
             {
-                var mensagemDeErro = env.IsDevelopment() ?
-                    $"{Environment.NewLine}{exception}" :
-                    "";
-
-                var mensagemParaUsuario = Resource.FormatarResource(Resource.MensagemDeErro500, mensagemDeErro);
-
-                var result = JsonSerializer.Serialize(
-                    new
-                    {
-                        erro = mensagemParaUsuario
-                    });
-
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(result);
+                await context.Response.WriteAsync(CriarMensagemDeErroCustomizada(excecao, ambiente));
             }
+        }
+
+        private string CriarMensagemDeErroCustomizada(Exception exception, IHostingEnvironment env)
+        {
+            dynamic retornoDeErro = new ExpandoObject();
+            retornoDeErro.MensagemParaOUsuario = Resource.MensagemDeErro500;
+
+            if (env.IsDevelopment())
+            {
+                retornoDeErro.MensagemParaODesenvolvedor = exception.Message;
+                retornoDeErro.DetalheParaODesenvolvedor = exception.StackTrace.Split("\r\n");
+            }
+
+            return JsonConvert.SerializeObject(retornoDeErro);
         }
     }
 }
