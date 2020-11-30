@@ -3,7 +3,6 @@ using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
-using System;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Services

@@ -1,7 +1,7 @@
 ﻿using Moq;
+using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using OnboardingSIGDB1.Domain._Base.Resources;
-using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
@@ -149,12 +149,12 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
             _funcionarioDto.Id = _id;
             _funcionarioDto.Nome = nomeInvalido;
             var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).Build();
-            
+
             _funcionarioRepositorioMock.Setup(_ => _.ObterPorIdAsync(_id)).ReturnsAsync(funcionarioDoBancoDeDados);
 
             await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
 
-            _funcionarioRepositorioMock.Verify(_ => _.ObterPorIdAsync(_id),Times.Once);
+            _funcionarioRepositorioMock.Verify(_ => _.ObterPorIdAsync(_id), Times.Once);
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
         }
     }

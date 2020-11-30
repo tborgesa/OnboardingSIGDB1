@@ -1,7 +1,7 @@
 ﻿using Moq;
+using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using OnboardingSIGDB1.Domain._Base.Resources;
-using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
@@ -18,7 +18,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         private readonly EmpresaDto _empresaDto;
         private readonly int _id;
         private readonly OnboardingSIGDB1Faker _onboardingSIGDB1faker;
-                
+
         private readonly ArmazenadorDeEmpresa _armazenadorDeEmpresa;
         private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
         private readonly Mock<IEmpresaRepositorio> _empresaRepositorioMock;
@@ -50,7 +50,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
                 _validadorCnpjDaEmpresaJaExistente
                 );
         }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(null)]
