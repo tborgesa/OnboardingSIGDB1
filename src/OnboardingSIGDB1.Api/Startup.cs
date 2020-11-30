@@ -32,6 +32,8 @@ namespace OnboardingSIGDB1.Api
 
             app.UseSwaggerDoc(env);
 
+            app.UseExceptionHandling();
+
             app.UseMvc();
         }
     }
