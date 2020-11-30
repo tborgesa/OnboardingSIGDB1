@@ -20,7 +20,7 @@ namespace OnboardingSIGDB1.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSwaggerGen();
+            services.AddSwaggerDoc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
