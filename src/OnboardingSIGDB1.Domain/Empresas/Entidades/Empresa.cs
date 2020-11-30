@@ -49,7 +49,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
 
             RuleFor(_ => _.Cnpj)
                 .Must(DeveSerCnpjValido)
-                .WithMessage(Resource.FormatarResource(Resource.MensagemDeCampoInvalido,EmpresaResources.Cnpj));
+                .WithMessage(Resource.FormatarResource(Resource.MensagemDeCampoInvalido, EmpresaResources.Cnpj));
 
             RuleFor(_ => _.DataDeFundacao)
                 .Must(_ => _ > DateTime.MinValue)

@@ -1,6 +1,4 @@
-﻿using Bogus;
-
-namespace OnboardingSIGDB1.Domain.Test._Comum
+﻿namespace OnboardingSIGDB1.Domain.Test._Comum
 {
     public class OnboardingSIGDB1FakerBuilder
     {

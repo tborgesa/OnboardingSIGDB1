@@ -1,5 +1,4 @@
 ﻿using FluentValidation.Results;
-using OnboardingSIGDB1.Domain._Base.Enumeradores;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using System.Threading.Tasks;
 

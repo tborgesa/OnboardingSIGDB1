@@ -1,6 +1,4 @@
-﻿using Bogus.Extensions.Brazil;
-using OnboardingSIGDB1.Domain._Base.Resources;
-using OnboardingSIGDB1.Domain.Empresas.Entidades;
+﻿using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using OnboardingSIGDB1.Domain.Test._Comum;
 using System;

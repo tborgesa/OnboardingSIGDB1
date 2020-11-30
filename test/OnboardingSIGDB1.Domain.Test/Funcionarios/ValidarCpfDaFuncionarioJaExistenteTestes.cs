@@ -1,6 +1,4 @@
-﻿using Bogus;
-using Bogus.Extensions.Brazil;
-using Moq;
+﻿using Moq;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;

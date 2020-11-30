@@ -1,6 +1,4 @@
-﻿using Bogus;
-using Bogus.Extensions.Brazil;
-using Moq;
+﻿using Moq;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
@@ -55,7 +53,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         public async Task NaoDeveAceitarCnpjJaCadastradoNaEdicao()
         {
             int idOutraEmpresa = 2;
-           
+
             _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_cnpj))
                 .ReturnsAsync(EmpresaBuilder.Novo().ComId(_id).ComCnpj(_cnpj).Build());
 
@@ -67,8 +65,8 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Fact]
         public async Task DeveAceitarCnpjJaCadastradoComOMesmoId()
         {
-           _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_cnpj))
-                .ReturnsAsync(EmpresaBuilder.Novo().ComId(_id).ComCnpj(_cnpj).Build());
+            _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_cnpj))
+                 .ReturnsAsync(EmpresaBuilder.Novo().ComId(_id).ComCnpj(_cnpj).Build());
 
             await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(_cnpj, _id);
 

@@ -1,5 +1,4 @@
-﻿using Bogus;
-using OnboardingSIGDB1.Domain._Base.Resources;
+﻿using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Cargos.Entidades;
 using OnboardingSIGDB1.Domain.Test._Builders;
 using OnboardingSIGDB1.Domain.Test._Comum;

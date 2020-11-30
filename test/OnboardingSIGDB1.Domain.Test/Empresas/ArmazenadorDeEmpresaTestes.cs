@@ -1,7 +1,4 @@
-﻿using Bogus;
-using Bogus.Extensions.Brazil;
-using Moq;
-using OnboardingSIGDB1.Domain._Base.Enumeradores;
+﻿using Moq;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
@@ -10,7 +7,6 @@ using OnboardingSIGDB1.Domain.Empresas.Interfaces;
 using OnboardingSIGDB1.Domain.Empresas.Services;
 using OnboardingSIGDB1.Domain.Test._Builders;
 using OnboardingSIGDB1.Domain.Test._Comum;
-using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -62,7 +58,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public async void DeveNotificarErroDeDominio(string nomeInvalido)
+        public async Task DeveNotificarErroDeDominio(string nomeInvalido)
         {
             _empresaDto.Nome = nomeInvalido;
 
@@ -72,14 +68,14 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         }
 
         [Fact]
-        public async void DeveNotificarErroDeDominioParaDtoNull()
+        public async Task DeveNotificarErroDeDominioParaDtoNull()
         {
             await _armazenadorDeEmpresa.ArmazenarAsync(null);
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
         }
 
         [Fact]
-        public async void DeveNotificarErroDeServico()
+        public async Task DeveNotificarErroDeServico()
         {
             _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_empresaDto.Cnpj))
                 .ReturnsAsync(EmpresaBuilder.Novo().ComId(_id).ComCnpj(_empresaDto.Cnpj).Build());

@@ -26,7 +26,7 @@ namespace OnboardingSIGDB1.Data._Base
             await _dbSet.Where(predicate).ToListAsync();
 
         public async Task<IEnumerable<TEntidade>> ListarAsync() => await _dbSet.ToListAsync();
-        
+
 
         public async Task<TEntidade> ObterPorIdAsync(TId id) => await _dbSet.FirstOrDefaultAsync(e => EqualityComparer<TId>.Default.Equals(e.Id, id));
 

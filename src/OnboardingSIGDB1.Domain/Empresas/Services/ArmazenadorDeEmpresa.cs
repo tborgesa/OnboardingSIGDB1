@@ -25,9 +25,9 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
         {
             empresaDto = empresaDto ?? new EmpresaDto();
 
-            await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(empresaDto.Cnpj,empresaDto.Id);
+            await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(empresaDto.Cnpj, empresaDto.Id);
 
-            var empresa = empresaDto.Id > 0 ? 
+            var empresa = empresaDto.Id > 0 ?
                 await EditarEmpresaAsync(empresaDto) :
                 CriarUmaNovaEmpresa(empresaDto);
 

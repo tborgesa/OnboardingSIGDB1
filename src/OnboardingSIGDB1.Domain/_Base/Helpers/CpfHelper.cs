@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace OnboardingSIGDB1.Domain._Base.Helpers
 {
@@ -32,7 +29,7 @@ namespace OnboardingSIGDB1.Domain._Base.Helpers
             return retorno;
         }
 
-       public static string RemoverMascaraDoCpf(this string cpf)
+        public static string RemoverMascaraDoCpf(this string cpf)
         {
             if (string.IsNullOrEmpty(cpf))
                 return cpf;

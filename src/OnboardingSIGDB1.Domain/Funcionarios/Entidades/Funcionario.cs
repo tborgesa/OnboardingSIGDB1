@@ -7,7 +7,7 @@ using System;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
 {
-    public class Funcionario : Entidade<int,Funcionario>
+    public class Funcionario : Entidade<int, Funcionario>
     {
         public string Nome { get; private set; }
         public string Cpf { get; private set; }
