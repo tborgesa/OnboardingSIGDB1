@@ -32,7 +32,7 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("v1/swagger.json", $"OnboardingSIGDB1 V1 ({env.EnvironmentName})");
+                c.SwaggerEndpoint("v1/swagger.json", $"{env.ApplicationName} V1 ({env.EnvironmentName})");
             });
         }
     }
