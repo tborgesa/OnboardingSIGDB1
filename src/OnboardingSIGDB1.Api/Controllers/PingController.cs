@@ -4,7 +4,7 @@ namespace OnboardingSIGDB1.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PIngController : ControllerBase
+    public class PingController : ControllerBase
     {
         // GET api/values
         [HttpGet]
