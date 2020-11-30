@@ -28,7 +28,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
             await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(empresaDto.Cnpj, empresaDto.Id);
 
             var empresa = empresaDto.Id > 0 ?
-                await EditarEmpresaAsync(empresaDto) :
+                await EditarUmaEmpresaAsync(empresaDto) :
                 CriarUmaNovaEmpresa(empresaDto);
 
             if (!empresa.Validar())
@@ -43,7 +43,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
             return new Empresa(empresaDto.Nome, empresaDto.Cnpj, empresaDto.DataDeFundacao);
         }
 
-        private async Task<Empresa> EditarEmpresaAsync(EmpresaDto empresaDto)
+        private async Task<Empresa> EditarUmaEmpresaAsync(EmpresaDto empresaDto)
         {
             var empresa = await _empresaRepositorio.ObterPorIdAsync(empresaDto.Id);
 

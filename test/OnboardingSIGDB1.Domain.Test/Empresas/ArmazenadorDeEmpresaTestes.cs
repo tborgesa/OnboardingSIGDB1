@@ -1,6 +1,7 @@
 ﻿using Moq;
 using OnboardingSIGDB1.Domain._Base.Notification;
 using OnboardingSIGDB1.Domain._Base.Resources;
+using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
@@ -14,14 +15,14 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
 {
     public class ArmazenadorDeEmpresaTestes
     {
-        private EmpresaDto _empresaDto;
-        private int _id;
-        private OnboardingSIGDB1Faker _onboardingSIGDB1faker;
-
-        private ArmazenadorDeEmpresa _armazenadorDeEmpresa;
-        private Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
-        private Mock<IEmpresaRepositorio> _empresaRepositorioMock;
-        private ValidadorCnpjDaEmpresaJaExistente _validadorCnpjDaEmpresaJaExistente;
+        private readonly EmpresaDto _empresaDto;
+        private readonly int _id;
+        private readonly OnboardingSIGDB1Faker _onboardingSIGDB1faker;
+                
+        private readonly ArmazenadorDeEmpresa _armazenadorDeEmpresa;
+        private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
+        private readonly Mock<IEmpresaRepositorio> _empresaRepositorioMock;
+        private readonly ValidadorCnpjDaEmpresaJaExistente _validadorCnpjDaEmpresaJaExistente;
 
         public ArmazenadorDeEmpresaTestes()
         {
@@ -35,11 +36,6 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
                 DataDeFundacao = _onboardingSIGDB1faker.QualquerDataDoUltimoAno()
             };
 
-            CriarArmazenador();
-        }
-
-        private void CriarArmazenador()
-        {
             _notificacaoDeDominioMock = new Mock<IDomainNotificationHandler>();
             _empresaRepositorioMock = new Mock<IEmpresaRepositorio>();
 
@@ -54,7 +50,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
                 _validadorCnpjDaEmpresaJaExistente
                 );
         }
-
+        
         [Theory]
         [InlineData("")]
         [InlineData(null)]
@@ -77,8 +73,9 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Fact]
         public async Task DeveNotificarErroDeServico()
         {
-            _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_empresaDto.Cnpj))
-                .ReturnsAsync(EmpresaBuilder.Novo().ComId(_id).ComCnpj(_empresaDto.Cnpj).Build());
+            var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).ComCnpj(_empresaDto.Cnpj).Build();
+
+            _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_empresaDto.Cnpj)).ReturnsAsync(empresaDoBancoDeDados);
 
             await _armazenadorDeEmpresa.ArmazenarAsync(_empresaDto);
 
@@ -90,8 +87,12 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         {
             await _armazenadorDeEmpresa.ArmazenarAsync(_empresaDto);
 
-            _empresaRepositorioMock.Verify(n => n.AdicionarAsync(
-                It.IsAny<Empresa>()), Times.Once);
+            _empresaRepositorioMock.Verify(_ => _.AdicionarAsync(
+                It.Is<Empresa>(_1 =>
+                _1.Nome == _empresaDto.Nome &&
+                _1.Cnpj == _empresaDto.Cnpj.RemoverMascaraDoCnpj() &&
+                _1.DataDeFundacao == _empresaDto.DataDeFundacao
+                )), Times.Once);
         }
 
         [Fact]
@@ -122,8 +123,8 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
 
             await _armazenadorDeEmpresa.ArmazenarAsync(_empresaDto);
 
-            Assert.NotEqual(empresaDoBancoDeDados.Cnpj, cnpjInicial);
-            Assert.Equal(empresaDoBancoDeDados.Cnpj, _empresaDto.Cnpj);
+            Assert.NotEqual(empresaDoBancoDeDados.Cnpj, cnpjInicial.RemoverMascaraDoCnpj());
+            Assert.Equal(empresaDoBancoDeDados.Cnpj, _empresaDto.Cnpj.RemoverMascaraDoCnpj());
         }
 
         [Fact]
@@ -142,11 +143,13 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             Assert.Equal(empresaDoBancoDeDados.DataDeFundacao, _empresaDto.DataDeFundacao);
         }
 
-        [Fact]
-        public async Task DeveValidarDominioNaEdicao()
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public async Task DeveValidarDominioNaEdicao(string nomeInvalido)
         {
             _empresaDto.Id = _onboardingSIGDB1faker.Id();
-            _empresaDto.Nome = null;
+            _empresaDto.Nome = nomeInvalido;
 
             var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).Build();
 
