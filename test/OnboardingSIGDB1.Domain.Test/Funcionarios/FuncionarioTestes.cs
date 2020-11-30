@@ -3,8 +3,8 @@ using Bogus.Extensions.Brazil;
 using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
-using OnboardingSIGDB1.Domain.Test.Builders;
-using OnboardingSIGDB1.Domain.Test.Common;
+using OnboardingSIGDB1.Domain.Test._Builders;
+using OnboardingSIGDB1.Domain.Test._Comum;
 using System;
 using Xunit;
 
@@ -15,14 +15,14 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         private readonly string _nome;
         private readonly string _cpf;
         private readonly DateTime? _dataDeContratacao;
-        private readonly Faker _faker;
+        private readonly OnboardingSIGDB1Faker _onboardingSIGDB1faker;
 
         public FuncionarioTestes()
         {
-            _faker = FakerBuilder.Novo().Build();
-            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
-            _cpf = _faker.Person.Cpf();
-            _dataDeContratacao = _faker.QualquerDataUltimoAno();
+            _onboardingSIGDB1faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
+            _nome = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150);
+            _cpf = _onboardingSIGDB1faker.Cpf();
+            _dataDeContratacao = _onboardingSIGDB1faker.QualquerDataDoUltimoAno();
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         [InlineData(Constantes.Numero151)]
         public void NaoDeveAceitarNomeComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
-            var nomeInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
+            var nomeInvalido = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(quantidadeDeCaracteres);
             var funcionario = FuncionarioBuilder.Novo().ComNome(nomeInvalido).Build();
 
             Assert.False(funcionario.Validar());
@@ -82,10 +82,13 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
             Assert.True(funcionario.Validar());
         }
 
-        [Fact]
-        public void NaoDeveAceitarCpfComTamanhoInvalido()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(4)]
+        [InlineData(10)]
+        public void NaoDeveAceitarCpfComTamanhoInvalido(int quantidadeDeCaracteres)
         {
-            var cpfInvalido = _faker.Random.Number(10).ToString();
+            var cpfInvalido = _onboardingSIGDB1faker.NumeroComQuantidadeExataDeCaracteresComoString(quantidadeDeCaracteres);
             var funcionario = FuncionarioBuilder.Novo().ComCpf(cpfInvalido).Build();
 
             Assert.False(funcionario.Validar());

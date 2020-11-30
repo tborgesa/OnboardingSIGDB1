@@ -3,8 +3,8 @@ using Bogus.Extensions.Brazil;
 using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
-using OnboardingSIGDB1.Domain.Test.Builders;
-using OnboardingSIGDB1.Domain.Test.Common;
+using OnboardingSIGDB1.Domain.Test._Builders;
+using OnboardingSIGDB1.Domain.Test._Comum;
 using System;
 using Xunit;
 
@@ -15,14 +15,14 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         private readonly string _nome;
         private readonly string _cnpj;
         private readonly DateTime? _dataDeFundacao;
-        private readonly Faker _faker;
+        private readonly OnboardingSIGDB1Faker _onboardingSIGDB1faker;
 
         public EmpresaTestes()
         {
-            _faker = FakerBuilder.Novo().Build();
-            _nome = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
-            _cnpj = _faker.Company.Cnpj();
-            _dataDeFundacao = _faker.QualquerDataUltimoAno();
+            _onboardingSIGDB1faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
+            _nome = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150);
+            _cnpj = _onboardingSIGDB1faker.Cnpj();
+            _dataDeFundacao = _onboardingSIGDB1faker.QualquerDataDoUltimoAno();
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [InlineData(Constantes.Numero151)]
         public void NaoDeveAceitarNomeComQuantidadeCaracterInvalido(int quantidadeDeCaracteres)
         {
-            var nomeInvalido = _faker.Lorem.Random.AlphaNumeric(quantidadeDeCaracteres);
+            var nomeInvalido = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(quantidadeDeCaracteres);
             var empresa = EmpresaBuilder.Novo().ComNome(nomeInvalido).Build();
 
             Assert.False(empresa.Validar());
@@ -82,10 +82,13 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             Assert.True(empresa.Validar());
         }
 
-        [Fact]
-        public void NaoDeveAceitarCnpjComTamanhoInvalido()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(13)]
+        public void NaoDeveAceitarCnpjComTamanhoInvalido(int quantidadeDeCaracteres)
         {
-            var cnpjInvalido = _faker.Random.Number(13).ToString();
+            var cnpjInvalido = _onboardingSIGDB1faker.NumeroComQuantidadeExataDeCaracteresComoString(quantidadeDeCaracteres);
             var empresa = EmpresaBuilder.Novo().ComCnpj(cnpjInvalido).Build();
 
             Assert.False(empresa.Validar());

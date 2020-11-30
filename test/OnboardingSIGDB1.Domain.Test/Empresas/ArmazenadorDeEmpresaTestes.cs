@@ -8,8 +8,8 @@ using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
 using OnboardingSIGDB1.Domain.Empresas.Services;
-using OnboardingSIGDB1.Domain.Test.Builders;
-using OnboardingSIGDB1.Domain.Test.Common;
+using OnboardingSIGDB1.Domain.Test._Builders;
+using OnboardingSIGDB1.Domain.Test._Comum;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -20,7 +20,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
     {
         private EmpresaDto _empresaDto;
         private int _id;
-        private Faker _faker;
+        private OnboardingSIGDB1Faker _onboardingSIGDB1faker;
 
         private ArmazenadorDeEmpresa _armazenadorDeEmpresa;
         private Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
@@ -29,14 +29,14 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
 
         public ArmazenadorDeEmpresaTestes()
         {
-            _faker = FakerBuilder.Novo().Build();
+            _onboardingSIGDB1faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
 
-            _id = _faker.Id();
+            _id = _onboardingSIGDB1faker.Id();
             _empresaDto = new EmpresaDto
             {
-                Nome = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150),
-                Cnpj = _faker.Company.Cnpj(),
-                DataDeFundacao = _faker.QualquerDataUltimoAno()
+                Nome = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150),
+                Cnpj = _onboardingSIGDB1faker.Cnpj(),
+                DataDeFundacao = _onboardingSIGDB1faker.QualquerDataDoUltimoAno()
             };
 
             CriarArmazenador();
@@ -101,8 +101,8 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Fact]
         public async Task DeveEditarONomeDaEmpresa()
         {
-            _empresaDto.Id = _faker.Id();
-            var nomeInicial = _faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
+            _empresaDto.Id = _onboardingSIGDB1faker.Id();
+            var nomeInicial = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150);
             var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).ComNome(nomeInicial).Build();
 
             _empresaRepositorioMock.Setup(_ => _.ObterPorIdAsync(_empresaDto.Id))
@@ -117,8 +117,8 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Fact]
         public async Task DeveEditarOCnpjDaEmpresa()
         {
-            _empresaDto.Id = _faker.Id();
-            var cnpjInicial = _faker.Company.Cnpj();
+            _empresaDto.Id = _onboardingSIGDB1faker.Id();
+            var cnpjInicial = _onboardingSIGDB1faker.Cnpj();
             var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).ComCnpj(cnpjInicial).Build();
 
             _empresaRepositorioMock.Setup(_ => _.ObterPorIdAsync(_empresaDto.Id))
@@ -133,8 +133,8 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Fact]
         public async Task DeveEditarADataDeFundacaoDaEmpresa()
         {
-            _empresaDto.Id = _faker.Id();
-            var dataDeFundacao = _faker.QualquerDataUltimoAno();
+            _empresaDto.Id = _onboardingSIGDB1faker.Id();
+            var dataDeFundacao = _onboardingSIGDB1faker.QualquerDataDoUltimoAno();
             var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).ComDataDeFundacao(dataDeFundacao).Build();
 
             _empresaRepositorioMock.Setup(_ => _.ObterPorIdAsync(_empresaDto.Id))
@@ -149,7 +149,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         [Fact]
         public async Task DeveValidarDominioNaEdicao()
         {
-            _empresaDto.Id = _faker.Id();
+            _empresaDto.Id = _onboardingSIGDB1faker.Id();
             _empresaDto.Nome = null;
 
             var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).Build();

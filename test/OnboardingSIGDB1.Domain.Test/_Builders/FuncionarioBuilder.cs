@@ -2,10 +2,10 @@
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
-using OnboardingSIGDB1.Domain.Test.Common;
+using OnboardingSIGDB1.Domain.Test._Comum;
 using System;
 
-namespace OnboardingSIGDB1.Domain.Test.Builders
+namespace OnboardingSIGDB1.Domain.Test._Builders
 {
     public class FuncionarioBuilder : BuilderBase
     {
@@ -16,11 +16,11 @@ namespace OnboardingSIGDB1.Domain.Test.Builders
 
         public static FuncionarioBuilder Novo()
         {
-            var faker = FakerBuilder.Novo().Build();
+            var faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
 
-            _nome = faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
-            _cpf = faker.Person.Cpf();
-            _dataDeContratacao = faker.QualquerDataUltimoAno();
+            _nome = faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150);
+            _cpf = faker.Cpf();
+            _dataDeContratacao = faker.QualquerDataDoUltimoAno();
 
             return new FuncionarioBuilder();
         }

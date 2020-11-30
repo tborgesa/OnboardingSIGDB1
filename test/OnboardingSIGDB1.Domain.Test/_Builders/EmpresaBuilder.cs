@@ -1,10 +1,10 @@
 ﻿using Bogus.Extensions.Brazil;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
-using OnboardingSIGDB1.Domain.Test.Common;
+using OnboardingSIGDB1.Domain.Test._Comum;
 using System;
 
-namespace OnboardingSIGDB1.Domain.Test.Builders
+namespace OnboardingSIGDB1.Domain.Test._Builders
 {
     public class EmpresaBuilder : BuilderBase
     {
@@ -15,11 +15,11 @@ namespace OnboardingSIGDB1.Domain.Test.Builders
 
         public static EmpresaBuilder Novo()
         {
-            var faker = FakerBuilder.Novo().Build();
+            var onboardingSIGDB1faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
 
-            _nome = faker.Lorem.Random.AlphaNumeric(Constantes.Numero150);
-            _cnpj = faker.Company.Cnpj();
-            _dataDeFundacao = faker.QualquerDataUltimoAno();
+            _nome = onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150);
+            _cnpj = onboardingSIGDB1faker.Cnpj();
+            _dataDeFundacao = onboardingSIGDB1faker.QualquerDataDoUltimoAno();
 
             return new EmpresaBuilder();
         }

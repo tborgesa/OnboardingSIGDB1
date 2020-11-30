@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnboardingSIGDB1.Domain.Test.Builders
+namespace OnboardingSIGDB1.Domain.Test._Builders
 {
     public abstract class BuilderBase
     {
