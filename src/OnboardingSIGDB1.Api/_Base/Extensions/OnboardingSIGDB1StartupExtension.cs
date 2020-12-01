@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnboardingSIGDB1.Domain._Base.Entidades.AppSettings;
 using OnboardingSIGDB1.IOC;
+using OnboardingSIGDB1.IOC._Extensions;
 
 namespace OnboardingSIGDB1.Api._Base.Extensions
 {
@@ -15,6 +16,7 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
             Configuration.Bind("OnboardingSIGDB1", appSettingsDoOnboardingSIGDB1);
             services.AddSingleton(appSettingsDoOnboardingSIGDB1);
 
+            services.AddOnboardingSIGDB1Context(Configuration, appSettingsDoOnboardingSIGDB1);
 
             services.AddOnboardingSIGDB1Services();
         }
