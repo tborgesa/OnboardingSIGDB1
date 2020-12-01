@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OnboardingSIGDB1.Domain._Base.Notification
+namespace OnboardingSIGDB1.Domain._Base.Interfaces
 {
     public interface IDomainNotificationHandler
     {

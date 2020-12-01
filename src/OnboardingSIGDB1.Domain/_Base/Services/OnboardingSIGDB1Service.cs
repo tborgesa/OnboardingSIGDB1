@@ -1,5 +1,5 @@
 ﻿using FluentValidation.Results;
-using OnboardingSIGDB1.Domain._Base.Notification;
+using OnboardingSIGDB1.Domain._Base.Interfaces;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain._Base.Services

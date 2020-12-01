@@ -1,6 +1,6 @@
 ﻿using Moq;
 using OnboardingSIGDB1.Domain._Base.Helpers;
-using OnboardingSIGDB1.Domain._Base.Notification;
+using OnboardingSIGDB1.Domain._Base.Interfaces;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;

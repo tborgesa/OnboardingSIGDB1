@@ -18,9 +18,9 @@ namespace OnboardingSIGDB1.IOC.Providers
             {
                 if (onboardingSIGDB1ServiceFilha.Interfaces.Any())
                 {
-                    foreach (var service in onboardingSIGDB1ServiceFilha.Interfaces)
+                    foreach (var interFace in onboardingSIGDB1ServiceFilha.Interfaces)
                     {
-                        services.AddScoped(service, onboardingSIGDB1ServiceFilha.Implementacao);
+                        services.AddScoped(interFace, onboardingSIGDB1ServiceFilha.Implementacao);
                     }
                 }
             }

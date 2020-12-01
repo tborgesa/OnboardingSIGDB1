@@ -1,4 +1,4 @@
-﻿using OnboardingSIGDB1.Domain._Base.Notification;
+﻿using OnboardingSIGDB1.Domain._Base.Interfaces;
 using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;

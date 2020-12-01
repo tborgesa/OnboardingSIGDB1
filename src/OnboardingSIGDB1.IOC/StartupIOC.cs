@@ -7,7 +7,11 @@ namespace OnboardingSIGDB1.IOC
     {
         public static void AddOnboardingSIGDB1Services(this IServiceCollection services)
         {
+            services.AddDomainBaseService();
+
             services.AddOnboardingSIGDB1Service();
+
+            services.AddOnboardingSIGDB1Repositorio();
         }
     }
 }

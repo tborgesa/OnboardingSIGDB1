@@ -3,7 +3,7 @@ using OnboardingSIGDB1.Domain.Cargos.Entidades;
 
 namespace OnboardingSIGDB1.Domain.Cargos.Interfaces
 {
-    public interface ICargoRepositorio : IRepositorioBase<int, Cargo>
+    public interface ICargoRepositorio : ICadastroCompletoRepositorio<int, Cargo>
     {
     }
 }

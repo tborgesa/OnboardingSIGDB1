@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using System;
 using System.Dynamic;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api._Base.Middlewares

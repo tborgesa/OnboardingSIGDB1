@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain._Base.Interfaces
 {
-    public interface IRepositorioBase<TId, TEntidade>
+    public interface ICadastroCompletoRepositorio<TId, TEntidade>
     {
         Task AdicionarAsync(TEntidade entidade);
         Task<IEnumerable<TEntidade>> BuscarAsync(Expression<Func<TEntidade, bool>> predicate);

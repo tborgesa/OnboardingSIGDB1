@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Interfaces
 {
-    public interface IFuncionarioRepositorio : IRepositorioBase<int, Funcionario>
+    public interface IFuncionarioRepositorio : ICadastroCompletoRepositorio<int, Funcionario>
     {
         Task<Funcionario> ObterPorCpfAsync(string cpf);
     }
