@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Services
 {
-    public class ArmazenadorDeFuncionario : DomainService, IArmazenadorDeFuncionario
+    public class ArmazenadorDeFuncionario : OnboardingSIGDB1Service, IArmazenadorDeFuncionario
     {
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
         private readonly IValidadorCpfDaFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;

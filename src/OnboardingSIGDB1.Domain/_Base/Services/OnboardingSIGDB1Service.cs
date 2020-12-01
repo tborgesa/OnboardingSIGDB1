@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain._Base.Services
 {
-    public abstract class DomainService
+    public abstract class OnboardingSIGDB1Service
     {
         protected readonly IDomainNotificationHandler NotificacaoDeDominio;
 
-        protected DomainService(IDomainNotificationHandler notificacaoDeDominio)
+        protected OnboardingSIGDB1Service(IDomainNotificationHandler notificacaoDeDominio)
         {
             NotificacaoDeDominio = notificacaoDeDominio;
         }

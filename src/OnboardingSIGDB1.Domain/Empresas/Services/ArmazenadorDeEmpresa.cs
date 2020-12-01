@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Empresas.Services
 {
-    public class ArmazenadorDeEmpresa : DomainService, IArmazenadorDeEmpresa
+    public class ArmazenadorDeEmpresa : OnboardingSIGDB1Service, IArmazenadorDeEmpresa
     {
         private readonly IEmpresaRepositorio _empresaRepositorio;
         private readonly IValidadorCnpjDaEmpresaJaExistente _validadorCnpjDaEmpresaJaExistente;

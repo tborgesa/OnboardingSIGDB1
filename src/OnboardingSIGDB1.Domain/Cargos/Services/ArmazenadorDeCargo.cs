@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Cargos.Services
 {
-    public class ArmazenadorDeCargo : DomainService, IArmazenadorDeCargo
+    public class ArmazenadorDeCargo : OnboardingSIGDB1Service, IArmazenadorDeCargo
     {
         private readonly ICargoRepositorio _cargoRepositorio;
 

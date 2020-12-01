@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Data._Base
 {
-    public class RepositorioBase<TId, TEntidade> :
+    public class CadastroCompletaRepositorioBase<TId, TEntidade> : OnboardingSIGDB1Repositorio,
         IRepositorioBase<TId, TEntidade>
         where TId : struct
         where TEntidade : Entidade<TId, TEntidade>
     {
         private readonly DbSet<TEntidade> _dbSet;
-        public RepositorioBase(DbContext context)
+        public CadastroCompletaRepositorioBase(DbContext context)
         {
             _dbSet = context.Set<TEntidade>();
         }

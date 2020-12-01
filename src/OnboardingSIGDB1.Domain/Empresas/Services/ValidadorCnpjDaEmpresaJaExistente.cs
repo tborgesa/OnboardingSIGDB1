@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Empresas.Services
 {
-    public class ValidadorCnpjDaEmpresaJaExistente : DomainService, IValidadorCnpjDaEmpresaJaExistente
+    public class ValidadorCnpjDaEmpresaJaExistente : OnboardingSIGDB1Service, IValidadorCnpjDaEmpresaJaExistente
     {
         IEmpresaRepositorio _empresaRepositorio;
 
