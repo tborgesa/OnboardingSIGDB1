@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnboardingSIGDB1.Api._Base.Extensions;
+using OnboardingSIGDB1.IOC;
 
 namespace OnboardingSIGDB1.Api
 {
@@ -18,8 +19,10 @@ namespace OnboardingSIGDB1.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddOnboardingSIGDB1Services();
+            
+            services.AddMvc();
+            
             services.AddSwaggerDoc();
         }
 
