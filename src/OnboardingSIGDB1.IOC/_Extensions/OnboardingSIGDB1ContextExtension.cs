@@ -9,12 +9,11 @@ namespace OnboardingSIGDB1.IOC._Extensions
     public static class OnboardingSIGDB1ContextExtension
     {
         public static void AddOnboardingSIGDB1Context(this IServiceCollection services,
-            IConfiguration configuration,
             AppSettingsDoOnboardingSIGDB1 appSettingsDoOnboardingSIGDB1)
         {
             services.AddDbContext<OnboardingSIGDB1Context>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString(appSettingsDoOnboardingSIGDB1.StringDeConexoes.OnboardingSIGDB1));
+                options.UseSqlServer(appSettingsDoOnboardingSIGDB1.StringDeConexoes.OnboardingSIGDB1);
             });
         }
     }

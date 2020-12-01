@@ -16,7 +16,7 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
             Configuration.Bind("OnboardingSIGDB1", appSettingsDoOnboardingSIGDB1);
             services.AddSingleton(appSettingsDoOnboardingSIGDB1);
 
-            services.AddOnboardingSIGDB1Context(Configuration, appSettingsDoOnboardingSIGDB1);
+            services.AddOnboardingSIGDB1Context(appSettingsDoOnboardingSIGDB1);
 
             services.AddOnboardingSIGDB1Services();
         }
