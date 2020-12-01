@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnboardingSIGDB1.Api._Base.Extensions;
-using OnboardingSIGDB1.IOC;
 
 namespace OnboardingSIGDB1.Api
 {
@@ -18,7 +17,7 @@ namespace OnboardingSIGDB1.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOnboardingSIGDB1Services(Configuration);
+            services.AddOnboardingSIGDB1(Configuration);
 
             services.AddMvc();
 
