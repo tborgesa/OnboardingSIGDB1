@@ -18,7 +18,7 @@ namespace OnboardingSIGDB1.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOnboardingSIGDB1Services();
+            services.AddOnboardingSIGDB1Services(Configuration);
 
             services.AddMvc();
 
