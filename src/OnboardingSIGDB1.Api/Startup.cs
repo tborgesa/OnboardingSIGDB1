@@ -32,9 +32,7 @@ namespace OnboardingSIGDB1.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwaggerDoc(env);
-
-            app.UseExceptionHandling();
+            app.UseOnboardingSIGDB1(env);
 
             app.UseMvc();
         }

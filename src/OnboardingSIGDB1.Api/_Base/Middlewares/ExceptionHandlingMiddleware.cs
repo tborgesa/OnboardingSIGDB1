@@ -31,15 +31,15 @@ namespace OnboardingSIGDB1.Api._Base.Middlewares
             }
         }
 
-        private string CriarMensagemDeErroCustomizada(Exception exception, IHostingEnvironment env)
+        private string CriarMensagemDeErroCustomizada(Exception excecao, IHostingEnvironment env)
         {
             dynamic retornoDeErro = new ExpandoObject();
             retornoDeErro.MensagemParaOUsuario = Resource.MensagemDeErro500;
 
             if (env.IsDevelopment())
             {
-                retornoDeErro.MensagemParaODesenvolvedor = exception.Message;
-                retornoDeErro.DetalheParaODesenvolvedor = exception.StackTrace.Split("\r\n");
+                retornoDeErro.MensagemParaODesenvolvedor = excecao.Message;
+                retornoDeErro.DetalheParaODesenvolvedor = excecao.StackTrace.Split("\r\n");
             }
 
             return JsonConvert.SerializeObject(retornoDeErro);
