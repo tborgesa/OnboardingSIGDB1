@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using OnboardingSIGDB1.Domain._Base.Interfaces;
-using OnboardingSIGDB1.Domain._Base.Resources;
-using System;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 

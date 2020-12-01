@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using OnboardingSIGDB1.Api._Base.Middlewares;
 
 namespace OnboardingSIGDB1.Api._Base.Extensions
 {
@@ -11,7 +10,7 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
             app.UseExceptionHandling();
 
             app.UseNotificationHandling();
-                        
+
             app.UseSwaggerDoc(env);
         }
     }
