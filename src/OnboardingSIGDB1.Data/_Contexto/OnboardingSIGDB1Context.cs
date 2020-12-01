@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace OnboardingSIGDB1.Data._Contexto
 {
@@ -8,7 +9,7 @@ namespace OnboardingSIGDB1.Data._Contexto
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(OnboardingSIGDB1Context).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(OnboardingSIGDB1Context).Assembly);
 
             base.OnModelCreating(modelBuilder);
         }
