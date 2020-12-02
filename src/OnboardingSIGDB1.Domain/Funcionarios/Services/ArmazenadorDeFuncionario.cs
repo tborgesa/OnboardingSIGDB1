@@ -26,14 +26,14 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
         {
             funcionarioDto = funcionarioDto ?? new FuncionarioDto();
 
-            await _validadorCpfDaFuncionarioJaExistente.ValidarAsync(funcionarioDto.Cpf, funcionarioDto.Id);
-
             var funcionario = funcionarioDto.Id == 0 ?
                 CriarUmNovoFuncionario(funcionarioDto) :
                 await EditarUmFuncionarioAsnyc(funcionarioDto);
 
             if (!funcionario.Validar())
                 await NotificarValidacoesDeDominioAsync(funcionario.ValidationResult);
+
+            await _validadorCpfDaFuncionarioJaExistente.ValidarAsync(funcionario.Cpf, funcionario.Id);
 
             if (!NotificacaoDeDominio.HasNotifications && funcionario.Id == 0)
                 await _funcionarioRepositorio.AdicionarAsync(funcionario);

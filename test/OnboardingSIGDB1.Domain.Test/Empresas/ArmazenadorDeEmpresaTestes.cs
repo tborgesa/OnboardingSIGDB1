@@ -75,7 +75,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         {
             var empresaDoBancoDeDados = EmpresaBuilder.Novo().ComId(_id).ComCnpj(_empresaDto.Cnpj).Build();
 
-            _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_empresaDto.Cnpj)).ReturnsAsync(empresaDoBancoDeDados);
+            _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(empresaDoBancoDeDados.Cnpj)).ReturnsAsync(empresaDoBancoDeDados);
 
             await _armazenadorDeEmpresa.ArmazenarAsync(_empresaDto);
 

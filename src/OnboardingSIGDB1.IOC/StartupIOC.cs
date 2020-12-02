@@ -6,9 +6,11 @@ namespace OnboardingSIGDB1.IOC
 {
     public static class StartupIOC
     {
-        public static void AddOnboardingSIGDB1Services(this IServiceCollection services)
+        public static void ResolverAsDependenciasDoOnboardingSIGDB1(this IServiceCollection services)
         {
             services.AddDomainBaseService();
+
+            services.AddOnboardingSIGDB1DbContextService();
 
             services.AddOnboardingSIGDB1Service();
 

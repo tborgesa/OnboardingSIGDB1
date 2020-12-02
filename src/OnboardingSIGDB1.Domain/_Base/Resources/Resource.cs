@@ -10,6 +10,13 @@
 
         public const string MensagemDeErro500 = "Estamos passando por alguns problemas técnicos.";
 
+        public const string Ambiente = "ASPNETCORE_ENVIRONMENT";
+        public const string Desenvolvimento = "Development";
+
+        public const string Post = "POST";
+        public const string Put = "PUT";
+        public const string Delete = "DELETE";
+
         public static string FormatarResource(string valor1, string valor2, string valor3)
         {
             return string.Format(valor1, valor2, valor3);

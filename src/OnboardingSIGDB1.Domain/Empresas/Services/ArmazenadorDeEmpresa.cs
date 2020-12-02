@@ -25,14 +25,14 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
         {
             empresaDto = empresaDto ?? new EmpresaDto();
 
-            await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(empresaDto.Cnpj, empresaDto.Id);
-
             var empresa = empresaDto.Id > 0 ?
                 await EditarUmaEmpresaAsync(empresaDto) :
                 CriarUmaNovaEmpresa(empresaDto);
 
             if (!empresa.Validar())
                 await NotificarValidacoesDeDominioAsync(empresa.ValidationResult);
+
+            await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(empresa.Cnpj, empresa.Id);
 
             if (!NotificacaoDeDominio.HasNotifications && empresa.Id == 0)
                 await _empresaRepositorio.AdicionarAsync(empresa);

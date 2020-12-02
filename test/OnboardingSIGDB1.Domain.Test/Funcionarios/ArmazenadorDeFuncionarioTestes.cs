@@ -74,9 +74,9 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         [Fact]
         public async Task DeveNotificarErroDeServico()
         {
-            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).Build();
+            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).ComCpf(_funcionarioDto.Cpf).Build();
 
-            _funcionarioRepositorioMock.Setup(_ => _.ObterPorCpfAsync(_funcionarioDto.Cpf)).ReturnsAsync(funcionarioDoBancoDeDados);
+            _funcionarioRepositorioMock.Setup(_ => _.ObterPorCpfAsync(funcionarioDoBancoDeDados.Cpf)).ReturnsAsync(funcionarioDoBancoDeDados);
 
             await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
 

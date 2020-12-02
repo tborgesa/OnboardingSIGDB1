@@ -1,4 +1,5 @@
-﻿using OnboardingSIGDB1.Data._Base;
+﻿using Microsoft.EntityFrameworkCore;
+using OnboardingSIGDB1.Data._Base;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
 using System;
@@ -8,13 +9,13 @@ namespace OnboardingSIGDB1.Data.Empresas
 {
     public class EmpresaRepositorio : CadastroCompletoRepositorioBase<int, Empresa>, IEmpresaRepositorio
     {
-        public async Task<Empresa> ObterPorCnpjAsync(string cnpj)
+        public EmpresaRepositorio(DbContext context) : base(context)
         {
-            var empresa = new Empresa("dgs", "455464", DateTime.Now);
+        }
 
-            await Task.CompletedTask;
-
-            return empresa;
+        public Task<Empresa> ObterPorCnpjAsync(string cnpj)
+        {
+            return DbSet.FirstOrDefaultAsync(_ => _.Cnpj == cnpj);
         }
     }
 }

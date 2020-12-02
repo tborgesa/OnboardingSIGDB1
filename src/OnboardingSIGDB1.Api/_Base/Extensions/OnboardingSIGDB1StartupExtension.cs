@@ -18,7 +18,7 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
 
             services.AddOnboardingSIGDB1Context(appSettingsDoOnboardingSIGDB1);
 
-            services.AddOnboardingSIGDB1Services();
+            services.ResolverAsDependenciasDoOnboardingSIGDB1();
         }
 
         public static void UseOnboardingSIGDB1(this IApplicationBuilder app, IHostingEnvironment env)
@@ -26,6 +26,8 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
             app.UseExceptionHandling();
 
             app.UseNotificationHandling();
+
+            app.UseCommitHandling();
 
             app.UseSwaggerDoc(env);
         }
