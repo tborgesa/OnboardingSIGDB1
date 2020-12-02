@@ -25,7 +25,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
             if (funcionario != null && funcionario.Id != id)
                 await NotificacaoDeDominio.HandleNotificacaoDeServicoAsync(
                      Resource.FormatarResourceToLowerValor2(
-                        Resource.MensagemJaExisteCadastrada,
+                        Resource.MensagemJaExisteCadastradoMasculino,
                         FuncionarioResources.Funcionario, FuncionarioResources.Cpf));
 
             return !NotificacaoDeDominio.HasNotifications;

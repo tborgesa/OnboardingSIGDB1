@@ -4,8 +4,12 @@
     {
         public const string OnboardingSIGDB1 = "OnboardingSIGDB1";
 
-        public const string MensagemJaExisteCadastrada = "Já existe uma {0} cadastrada com o {1} informado.";
-        public const string MensagemJaExisteCadastrado = "Já existe um {0} cadastrado com o {1} informado.";
+        public const string MensagemNaoExisteNoBancoDeDadosFeminino = "{0} não encontrada.";
+        public const string MensagemNaoExisteNoBancoDeDadosMasculino = "{0} não encontrado.";
+
+        public const string MensagemJaExisteCadastradoFeminino = "Já existe uma {0} cadastrada com o {1} informado.";
+        public const string MensagemJaExisteCadastradoMasculino = "Já existe um {0} cadastrado com o {1} informado.";
+
         public const string MensagemDeCampoInvalido = "O campo {0} deve ser um valor válido.";
 
         public const string MensagemDeErro500 = "Estamos passando por alguns problemas técnicos.";

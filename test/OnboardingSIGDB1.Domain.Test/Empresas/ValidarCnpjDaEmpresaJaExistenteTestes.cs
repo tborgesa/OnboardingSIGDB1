@@ -28,7 +28,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             _id = _onboardingSIGDB1faker.Id();
             _cnpj = _onboardingSIGDB1faker.Cnpj();
             _erroEsperado = Resource.FormatarResourceToLowerValor2(
-                Resource.MensagemJaExisteCadastrada,
+                Resource.MensagemJaExisteCadastradoFeminino,
                 EmpresaResources.Empresa, EmpresaResources.Cnpj);
 
             _empresaRepositorioMock = new Mock<IEmpresaRepositorio>();
@@ -44,7 +44,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             _empresaRepositorioMock.Setup(_ => _.ObterPorCnpjAsync(_cnpj))
                 .ReturnsAsync(EmpresaBuilder.Novo().ComId(_id).ComCnpj(_cnpj).Build());
 
-            await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(_cnpj);
+            await _validadorCnpjDaEmpresaJaExistente.ValidarAsync(_cnpj, 0);
 
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeServicoAsync(It.Is<string>(_1 => _1 == _erroEsperado)));
         }

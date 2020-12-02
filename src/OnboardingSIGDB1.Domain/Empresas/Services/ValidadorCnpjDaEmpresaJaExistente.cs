@@ -9,7 +9,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
 {
     public class ValidadorCnpjDaEmpresaJaExistente : OnboardingSIGDB1Service, IValidadorCnpjDaEmpresaJaExistente
     {
-        IEmpresaRepositorio _empresaRepositorio;
+        private readonly IEmpresaRepositorio _empresaRepositorio;
 
         public ValidadorCnpjDaEmpresaJaExistente(
             IDomainNotificationHandler notificacaoDeDominio,
@@ -18,14 +18,14 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
             _empresaRepositorio = empresaRepositorio;
         }
 
-        public async Task<bool> ValidarAsync(string cnpj, int? id = null)
+        public async Task<bool> ValidarAsync(string cnpj, int idDaEntidadeAtual)
         {
             var empresa = await _empresaRepositorio.ObterPorCnpjAsync(cnpj);
 
-            if (empresa != null && empresa.Id != id)
+            if (empresa != null && empresa.Id != idDaEntidadeAtual)
                 await NotificacaoDeDominio.HandleNotificacaoDeServicoAsync(
                      Resource.FormatarResourceToLowerValor2(
-                         Resource.MensagemJaExisteCadastrada,
+                         Resource.MensagemJaExisteCadastradoFeminino,
                          EmpresaResources.Empresa, EmpresaResources.Cnpj)
                      );
 

@@ -34,14 +34,15 @@ namespace OnboardingSIGDB1.Api.Controllers
         {
             await _armazenadorDeEmpresa.ArmazenarAsync(empresaDto);
 
-            await Task.CompletedTask;
             return Ok();
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, EmpresaDto empresaDto)
         {
-            await Task.CompletedTask;
+            empresaDto.Id = id;
+            await _armazenadorDeEmpresa.ArmazenarAsync(empresaDto);
+
             return Ok();
         }
 

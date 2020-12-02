@@ -29,7 +29,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
             _id = _onboardingSIGDB1faker.Id();
             _cpf = _onboardingSIGDB1faker.Cpf();
             _erroEsperado = Resource.FormatarResourceToLowerValor2(
-                Resource.MensagemJaExisteCadastrada,
+                Resource.MensagemJaExisteCadastradoMasculino,
                 FuncionarioResources.Funcionario, FuncionarioResources.Cpf);
 
             _funcionarioRepositorio = new Mock<IFuncionarioRepositorio>();

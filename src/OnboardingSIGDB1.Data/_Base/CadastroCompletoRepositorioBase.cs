@@ -27,7 +27,7 @@ namespace OnboardingSIGDB1.Data._Base
         
         public async Task<IEnumerable<TEntidade>> ListarAsync() => await DbSet.ToListAsync();
 
-        public async Task<TEntidade> ObterPorIdAsync(TId id) => await DbSet.FirstOrDefaultAsync(e => EqualityComparer<TId>.Default.Equals(e.Id, id));
+        public async Task<TEntidade> ObterPorIdAsync(TId id) => await DbSet.FindAsync(id);
         
         public void Remover(TEntidade entidade) =>  DbSet.Remove(entidade);
     }
