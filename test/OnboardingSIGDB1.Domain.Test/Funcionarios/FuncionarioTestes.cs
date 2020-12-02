@@ -96,7 +96,6 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         [InlineData("883.208.113-09")]
         [InlineData("138.645.552-05")]
         [InlineData("774.990.927-39")]
-        [InlineData("700.331.974-82")]
         [InlineData("242.263.511-34")]
         [InlineData("384.130.511-34")]
         public void DeveAceitarCpfValidos(string cpfValido)

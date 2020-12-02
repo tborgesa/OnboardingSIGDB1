@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using OnboardingSIGDB1.Data._Contexto;
 using OnboardingSIGDB1.Domain._Base.Entidades.AppSettings;
-using OnboardingSIGDB1.Domain._Base.Resources;
-using System;
 
 namespace OnboardingSIGDB1.IOC._Extensions
 {
