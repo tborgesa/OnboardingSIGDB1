@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Cargos.Interfaces
 {
-    internal interface IArmazenadorDeCargo
+    public interface IArmazenadorDeCargo
     {
         Task ArmazenarAsync(CargoDto cargoDto);
     }
