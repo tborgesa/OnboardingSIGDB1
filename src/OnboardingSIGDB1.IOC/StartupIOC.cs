@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OnboardingSIGDB1.IOC.Providers;
-using OnboardingSIGDB1.Domain._Base.Resources;
 
 namespace OnboardingSIGDB1.IOC
 {

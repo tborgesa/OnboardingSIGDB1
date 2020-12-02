@@ -2,7 +2,6 @@
 using OnboardingSIGDB1.Data._Base;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
-using System;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Data.Empresas

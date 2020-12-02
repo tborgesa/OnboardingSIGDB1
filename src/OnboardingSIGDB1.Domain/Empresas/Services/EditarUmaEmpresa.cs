@@ -13,7 +13,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
     {
         private readonly IEmpresaRepositorio _empresaRepositorio;
 
-        public EditarUmaEmpresa(IDomainNotificationHandler notificacaoDeDominio, 
+        public EditarUmaEmpresa(IDomainNotificationHandler notificacaoDeDominio,
             IEmpresaRepositorio empresaRepositorio)
             : base(notificacaoDeDominio)
         {

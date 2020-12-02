@@ -1,10 +1,8 @@
 ﻿using OnboardingSIGDB1.Domain._Base.Interfaces;
-using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
-using OnboardingSIGDB1.Domain.Empresas.Resources;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Empresas.Services

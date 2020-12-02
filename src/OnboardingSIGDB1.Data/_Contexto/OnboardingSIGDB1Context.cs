@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace OnboardingSIGDB1.Data._Contexto
 {

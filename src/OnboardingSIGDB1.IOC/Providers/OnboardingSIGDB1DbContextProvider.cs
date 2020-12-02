@@ -5,7 +5,7 @@ using OnboardingSIGDB1.Domain._Base.Interfaces;
 
 namespace OnboardingSIGDB1.IOC.Providers
 {
-    public static  class OnboardingSIGDB1DbContextProvider
+    public static class OnboardingSIGDB1DbContextProvider
     {
         public static void AddOnboardingSIGDB1DbContextService(this IServiceCollection services)
         {
