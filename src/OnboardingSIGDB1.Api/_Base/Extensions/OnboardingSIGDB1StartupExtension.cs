@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OnboardingSIGDB1.Domain._Base.Entidades.AppSettings;
 using OnboardingSIGDB1.IOC;
 using OnboardingSIGDB1.IOC._Extensions;
+using OnboardingSIGDB1.IOC.AutoMapper;
 
 namespace OnboardingSIGDB1.Api._Base.Extensions
 {
@@ -19,6 +20,8 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
             services.AddOnboardingSIGDB1Context(appSettingsDoOnboardingSIGDB1);
 
             services.ResolverAsDependenciasDoOnboardingSIGDB1();
+
+            AutoMapperConfiguration.Initialize();
         }
 
         public static void UseOnboardingSIGDB1(this IApplicationBuilder app, IHostingEnvironment env)

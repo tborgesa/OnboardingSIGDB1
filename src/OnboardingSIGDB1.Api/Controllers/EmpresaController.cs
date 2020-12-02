@@ -2,6 +2,7 @@
 using OnboardingSIGDB1.Api._Base.Controllers;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
+using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers
@@ -9,10 +10,13 @@ namespace OnboardingSIGDB1.Api.Controllers
     public class EmpresaController : OnboardingSIGDB1Controller
     {
         private readonly IArmazenadorDeEmpresa _armazenadorDeEmpresa;
+        private readonly IEmpresaRepositorio _empresaRepositorio;
 
-        public EmpresaController(IArmazenadorDeEmpresa armazenadorDeEmpresa)
+        public EmpresaController(IArmazenadorDeEmpresa armazenadorDeEmpresa,
+            IEmpresaRepositorio empresaRepositorio)
         {
             _armazenadorDeEmpresa = armazenadorDeEmpresa;
+            _empresaRepositorio = empresaRepositorio;
         }
 
         [HttpGet]
@@ -25,8 +29,12 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            await Task.CompletedTask;
-            return Ok();
+            var empresa = await _empresaRepositorio.ObterPorIdAsync(id);
+
+            if (empresa == null)
+                return Ok();
+
+            return Ok(empresa.MapTo<EmpresaDto>());
         }
 
         [HttpPost()]
