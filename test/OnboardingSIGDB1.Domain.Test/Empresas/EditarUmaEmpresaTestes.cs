@@ -53,7 +53,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             _empresaRepositorioMock.Setup(_ => _.ObterPorIdAsync(_empresaDto.Id))
                 .ReturnsAsync(empresaDoBancoDeDados);
 
-            await _editarUmaEmpresa.EditarUmaEmpresaAsync(_empresaDto);
+            await _editarUmaEmpresa.EditarAsync(_empresaDto);
 
             Assert.NotEqual(empresaDoBancoDeDados.Nome, nomeInicial);
             Assert.Equal(empresaDoBancoDeDados.Nome, _empresaDto.Nome);
@@ -69,7 +69,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             _empresaRepositorioMock.Setup(_ => _.ObterPorIdAsync(_empresaDto.Id))
                 .ReturnsAsync(empresaDoBancoDeDados);
 
-            await _editarUmaEmpresa.EditarUmaEmpresaAsync(_empresaDto);
+            await _editarUmaEmpresa.EditarAsync(_empresaDto);
 
             Assert.NotEqual(empresaDoBancoDeDados.Cnpj, cnpjInicial.RemoverMascaraDoCnpj());
             Assert.Equal(empresaDoBancoDeDados.Cnpj, _empresaDto.Cnpj.RemoverMascaraDoCnpj());
@@ -85,7 +85,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             _empresaRepositorioMock.Setup(_ => _.ObterPorIdAsync(_empresaDto.Id))
                 .ReturnsAsync(empresaDoBancoDeDados);
 
-            await _editarUmaEmpresa.EditarUmaEmpresaAsync(_empresaDto);
+            await _editarUmaEmpresa.EditarAsync(_empresaDto);
 
             Assert.NotEqual(empresaDoBancoDeDados.DataDeFundacao, dataDeFundacao);
             Assert.Equal(empresaDoBancoDeDados.DataDeFundacao, _empresaDto.DataDeFundacao);
@@ -96,7 +96,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         {
             _empresaDto.Id = _id;
 
-            await _editarUmaEmpresa.EditarUmaEmpresaAsync(_empresaDto);
+            await _editarUmaEmpresa.EditarAsync(_empresaDto);
 
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
         }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnboardingSIGDB1.Api._Base.Controllers;
-using OnboardingSIGDB1.Domain.Empresas.Dto;
-using OnboardingSIGDB1.Domain.Empresas.Interfaces;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
 using System.Threading.Tasks;

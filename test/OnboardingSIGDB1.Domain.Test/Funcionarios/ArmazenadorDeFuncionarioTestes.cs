@@ -21,7 +21,8 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
         private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
         private readonly Mock<IFuncionarioRepositorio> _funcionarioRepositorioMock;
-        private readonly ValidadorCpfDaFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;
+        private readonly Mock<IValidadorCpfDaFuncionarioJaExistente> _validadorCpfDaFuncionarioJaExistenteMock;
+        private readonly Mock<IEditarUmFuncionario> _editarUmFuncionarioMock;
         private readonly ArmazenadorDeFuncionario _armazenadorDeFuncionario;
 
         public ArmazenadorDeFuncionarioTestes()
@@ -38,25 +39,39 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
             _notificacaoDeDominioMock = new Mock<IDomainNotificationHandler>();
             _funcionarioRepositorioMock = new Mock<IFuncionarioRepositorio>();
-
-            _validadorCpfDaFuncionarioJaExistente = new ValidadorCpfDaFuncionarioJaExistente(
-                _notificacaoDeDominioMock.Object,
-                _funcionarioRepositorioMock.Object
-                );
+            _validadorCpfDaFuncionarioJaExistenteMock = new Mock<IValidadorCpfDaFuncionarioJaExistente>();
+            _editarUmFuncionarioMock = new Mock<IEditarUmFuncionario>();
 
             _armazenadorDeFuncionario = new ArmazenadorDeFuncionario(
                 _notificacaoDeDominioMock.Object,
                 _funcionarioRepositorioMock.Object,
-                _validadorCpfDaFuncionarioJaExistente
+                _validadorCpfDaFuncionarioJaExistenteMock.Object,
+                _editarUmFuncionarioMock.Object
              );
         }
 
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public async Task DeveNotificarErroDeDominio(string nomeInvalido)
+        public async Task DeveValidarDominioNaInsercao(string nomeInvalido)
         {
             _funcionarioDto.Nome = nomeInvalido;
+
+            await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
+
+            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public async Task DeveValidarDominioNaEdicao(string nomeInvalido)
+        {
+            _funcionarioDto.Id = _id;
+            _funcionarioDto.Nome = nomeInvalido;
+            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).Build();
+
+            MockarAEdicaoDoDto();
 
             await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
 
@@ -72,15 +87,22 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         }
 
         [Fact]
-        public async Task DeveNotificarErroDeServico()
+        public async Task DeveChamarMetodoValidacaoCnpjNaInsercao()
         {
-            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).ComCpf(_funcionarioDto.Cpf).Build();
+            await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
 
-            _funcionarioRepositorioMock.Setup(_ => _.ObterPorCpfAsync(funcionarioDoBancoDeDados.Cpf)).ReturnsAsync(funcionarioDoBancoDeDados);
+            _validadorCpfDaFuncionarioJaExistenteMock.Verify(_ => _.ValidarAsync(_funcionarioDto.Cpf.RemoverMascaraDoCpf(), 0));
+        }
+
+        [Fact]
+        public async Task DeveChamarMetodoValidacaoCnpjNaEdicao()
+        {
+            _funcionarioDto.Id = _id;
+            MockarAEdicaoDoDto();
 
             await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
 
-            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeServicoAsync(It.IsAny<string>()));
+            _validadorCpfDaFuncionarioJaExistenteMock.Verify(_ => _.ValidarAsync(_funcionarioDto.Cpf.RemoverMascaraDoCpf(), _funcionarioDto.Id));
         }
 
         [Fact]
@@ -96,66 +118,17 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
                     )), Times.Once);
         }
 
-        [Fact]
-        public async Task DeveEditarONomeDoFuncionario()
+        private void MockarAEdicaoDoDto()
         {
-            var nomeInicial = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150);
-            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).ComNome(nomeInicial).Build();
-            _funcionarioDto.Id = _id;
+            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().
+                ComId(_id).
+                ComCpf(_funcionarioDto.Cpf).
+                ComNome(_funcionarioDto.Nome).
+                ComDataDeContratacao(_funcionarioDto.DataDeContratacao)
+                .Build();
 
-            _funcionarioRepositorioMock.Setup(_ => _.ObterPorIdAsync(_id)).ReturnsAsync(funcionarioDoBancoDeDados);
-
-            await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
-
-            Assert.NotEqual(funcionarioDoBancoDeDados.Nome, nomeInicial);
-            Assert.Equal(funcionarioDoBancoDeDados.Nome, _funcionarioDto.Nome);
-        }
-
-        [Fact]
-        public async Task DeveEditarOCpfDoFuncionario()
-        {
-            var cpfInicial = _onboardingSIGDB1faker.Cpf();
-            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).ComCpf(cpfInicial).Build();
-            _funcionarioDto.Id = _id;
-
-            _funcionarioRepositorioMock.Setup(_ => _.ObterPorIdAsync(_id)).ReturnsAsync(funcionarioDoBancoDeDados);
-
-            await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
-
-            Assert.NotEqual(funcionarioDoBancoDeDados.Cpf, cpfInicial.RemoverMascaraDoCpf());
-            Assert.Equal(funcionarioDoBancoDeDados.Cpf, _funcionarioDto.Cpf.RemoverMascaraDoCpf());
-        }
-
-        [Fact]
-        public async Task DeveEditarADataDeContratacaoDoFuncionario()
-        {
-            var dataDeContratacaoInicial = _onboardingSIGDB1faker.QualquerDataDoUltimoAno();
-            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).ComDataDeContratacao(dataDeContratacaoInicial).Build();
-            _funcionarioDto.Id = _id;
-
-            _funcionarioRepositorioMock.Setup(_ => _.ObterPorIdAsync(_id)).ReturnsAsync(funcionarioDoBancoDeDados);
-
-            await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
-
-            Assert.NotEqual(funcionarioDoBancoDeDados.DataDeContratacao, dataDeContratacaoInicial);
-            Assert.Equal(funcionarioDoBancoDeDados.DataDeContratacao, _funcionarioDto.DataDeContratacao);
-        }
-
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        public async Task DeveValidarDominioNaEdicao(string nomeInvalido)
-        {
-            _funcionarioDto.Id = _id;
-            _funcionarioDto.Nome = nomeInvalido;
-            var funcionarioDoBancoDeDados = FuncionarioBuilder.Novo().ComId(_id).Build();
-
-            _funcionarioRepositorioMock.Setup(_ => _.ObterPorIdAsync(_id)).ReturnsAsync(funcionarioDoBancoDeDados);
-
-            await _armazenadorDeFuncionario.ArmazenarAsync(_funcionarioDto);
-
-            _funcionarioRepositorioMock.Verify(_ => _.ObterPorIdAsync(_id), Times.Once);
-            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
+            _editarUmFuncionarioMock.Setup(_ => _.EditarAsync(_funcionarioDto))
+                .ReturnsAsync(funcionarioDoBancoDeDados);
         }
     }
 }

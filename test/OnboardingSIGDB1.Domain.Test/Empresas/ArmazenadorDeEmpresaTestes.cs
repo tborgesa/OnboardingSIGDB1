@@ -125,7 +125,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
                 ComDataDeFundacao(_empresaDto.DataDeFundacao)
                 .Build();
 
-            _editarUmaEmpresaMock.Setup(_ => _.EditarUmaEmpresaAsync(_empresaDto))
+            _editarUmaEmpresaMock.Setup(_ => _.EditarAsync(_empresaDto))
                 .ReturnsAsync(empresaDoBancoDeDados);
         }
     }

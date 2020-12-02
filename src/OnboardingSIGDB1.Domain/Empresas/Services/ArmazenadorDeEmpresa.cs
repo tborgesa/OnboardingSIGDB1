@@ -29,7 +29,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
             empresaDto = empresaDto ?? new EmpresaDto();
 
             var empresa = empresaDto.Id > 0 ?
-                await _editarUmaEmpresaRepositorio.EditarUmaEmpresaAsync(empresaDto) :
+                await _editarUmaEmpresaRepositorio.EditarAsync(empresaDto) :
                 CriarUmaNovaEmpresa(empresaDto);
 
             if (NotificacaoDeDominio.HasNotifications)

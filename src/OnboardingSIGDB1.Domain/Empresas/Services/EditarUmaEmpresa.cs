@@ -20,7 +20,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
             _empresaRepositorio = empresaRepositorio;
         }
 
-        public async Task<Empresa> EditarUmaEmpresaAsync(EmpresaDto empresaDto)
+        public async Task<Empresa> EditarAsync(EmpresaDto empresaDto)
         {
             var empresa = await _empresaRepositorio.ObterPorIdAsync(empresaDto.Id);
 

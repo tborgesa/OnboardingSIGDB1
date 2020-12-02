@@ -11,15 +11,17 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
     {
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
         private readonly IValidadorCpfDaFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;
+        private readonly IEditarUmFuncionario _editarUmFuncionario;
 
         public ArmazenadorDeFuncionario(
             IDomainNotificationHandler notificacaoDeDominio,
             IFuncionarioRepositorio funcionarioRepositorio,
-            IValidadorCpfDaFuncionarioJaExistente validadorCpfDaFuncionarioJaExistente
-            ) : base(notificacaoDeDominio)
+            IValidadorCpfDaFuncionarioJaExistente validadorCpfDaFuncionarioJaExistente,
+            IEditarUmFuncionario editarUmFuncionario) : base(notificacaoDeDominio)
         {
             _funcionarioRepositorio = funcionarioRepositorio;
             _validadorCpfDaFuncionarioJaExistente = validadorCpfDaFuncionarioJaExistente;
+            _editarUmFuncionario = editarUmFuncionario;
         }
 
         public async Task ArmazenarAsync(FuncionarioDto funcionarioDto)
@@ -28,7 +30,10 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
 
             var funcionario = funcionarioDto.Id == 0 ?
                 CriarUmNovoFuncionario(funcionarioDto) :
-                await EditarUmFuncionarioAsnyc(funcionarioDto);
+                await _editarUmFuncionario.EditarAsync(funcionarioDto);
+
+            if (NotificacaoDeDominio.HasNotifications)
+                return;
 
             if (!funcionario.Validar())
                 await NotificarValidacoesDeDominioAsync(funcionario.ValidationResult);
@@ -37,17 +42,6 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
 
             if (!NotificacaoDeDominio.HasNotifications && funcionario.Id == 0)
                 await _funcionarioRepositorio.AdicionarAsync(funcionario);
-        }
-
-        private async Task<Funcionario> EditarUmFuncionarioAsnyc(FuncionarioDto funcionarioDto)
-        {
-            var funcionario = await _funcionarioRepositorio.ObterPorIdAsync(funcionarioDto.Id);
-
-            funcionario.AlterarNome(funcionarioDto.Nome);
-            funcionario.AlterarCpf(funcionarioDto.Cpf);
-            funcionario.AlterarDataDeContratacao(funcionarioDto.DataDeContratacao);
-
-            return funcionario;
         }
 
         private Funcionario CriarUmNovoFuncionario(FuncionarioDto funcionarioDto)

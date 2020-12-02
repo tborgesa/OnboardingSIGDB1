@@ -6,6 +6,6 @@ namespace OnboardingSIGDB1.Domain.Empresas.Interfaces
 {
     public interface IEditarUmaEmpresa
     {
-        Task<Empresa> EditarUmaEmpresaAsync(EmpresaDto empresaDto);
+        Task<Empresa> EditarAsync(EmpresaDto empresaDto);
     }
 }

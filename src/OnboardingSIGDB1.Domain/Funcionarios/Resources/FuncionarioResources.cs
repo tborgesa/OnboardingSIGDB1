@@ -3,7 +3,7 @@
     public static class FuncionarioResources
     {
         public static string DataDeContratacao = "Data de Contratação";
-        public const string Funcionario = "Funcionario";
+        public const string Funcionario = "Funcionário";
         public const string Cpf = "CPF";
     }
 }
