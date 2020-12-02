@@ -17,7 +17,7 @@ namespace OnboardingSIGDB1.Api._Base.Middlewares
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IHostingEnvironment ambiente)
+        public async Task Invoke(HttpContext context)
         {
             try
             {
@@ -27,20 +27,19 @@ namespace OnboardingSIGDB1.Api._Base.Middlewares
             {
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(CriarMensagemDeErroCustomizada(excecao, ambiente));
+                await context.Response.WriteAsync(CriarMensagemDeErroCustomizada(excecao));
             }
         }
 
-        private string CriarMensagemDeErroCustomizada(Exception excecao, IHostingEnvironment env)
+        private string CriarMensagemDeErroCustomizada(Exception excecao)
         {
             dynamic retornoDeErro = new ExpandoObject();
             retornoDeErro.MensagemParaOUsuario = Resource.MensagemDeErro500;
 
-            if (env.IsDevelopment())
-            {
-                retornoDeErro.MensagemParaODesenvolvedor = excecao.Message;
-                retornoDeErro.DetalheParaODesenvolvedor = excecao.StackTrace.Split("\r\n");
-            }
+#if DEBUG
+            retornoDeErro.MensagemParaODesenvolvedor = excecao.Message;
+            retornoDeErro.DetalheParaODesenvolvedor = excecao.StackTrace.Split("\r\n");
+#endif
 
             return JsonConvert.SerializeObject(retornoDeErro);
         }
