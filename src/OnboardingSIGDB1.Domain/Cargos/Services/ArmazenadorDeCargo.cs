@@ -10,13 +10,15 @@ namespace OnboardingSIGDB1.Domain.Cargos.Services
     public class ArmazenadorDeCargo : OnboardingSIGDB1Service, IArmazenadorDeCargo
     {
         private readonly ICargoRepositorio _cargoRepositorio;
+        private readonly IEditarUmCargo _editarUmCargo;
 
         public ArmazenadorDeCargo(
             IDomainNotificationHandler notificacaoDeDominio,
-            ICargoRepositorio cargoRepositorio
-            ) : base(notificacaoDeDominio)
+            ICargoRepositorio cargoRepositorio,
+            IEditarUmCargo editarUmCargo) : base(notificacaoDeDominio)
         {
             _cargoRepositorio = cargoRepositorio;
+            _editarUmCargo = editarUmCargo;
         }
 
         public async Task ArmazenarAsync(CargoDto cargoDto)
@@ -25,22 +27,16 @@ namespace OnboardingSIGDB1.Domain.Cargos.Services
 
             var cargo = cargoDto.Id == 0 ?
                 CriarUmNovoCargo(cargoDto) :
-                await EditarUmCargoAsync(cargoDto);
+                await _editarUmCargo.EditarAsync(cargoDto);
+
+            if (NotificacaoDeDominio.HasNotifications)
+                return;
 
             if (!cargo.Validar())
                 await NotificarValidacoesDeDominioAsync(cargo.ValidationResult);
 
             if (!NotificacaoDeDominio.HasNotifications && cargo.Id == 0)
                 await _cargoRepositorio.AdicionarAsync(cargo);
-        }
-
-        private async Task<Cargo> EditarUmCargoAsync(CargoDto cargoDto)
-        {
-            var cargo = await _cargoRepositorio.ObterPorIdAsync(cargoDto.Id);
-
-            cargo.AlterarDescricao(cargoDto.Descricao);
-
-            return cargo;
         }
 
         private Cargo CriarUmNovoCargo(CargoDto cargoDto)

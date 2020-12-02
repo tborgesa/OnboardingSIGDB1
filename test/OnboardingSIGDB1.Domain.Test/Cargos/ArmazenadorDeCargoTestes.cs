@@ -19,6 +19,7 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
         private readonly CargoDto _cargoDto;
 
         private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
+        private readonly Mock<IEditarUmCargo> _editarUmCargoMock;
         private readonly Mock<ICargoRepositorio> _cargoRepositorioMock;
         private readonly ArmazenadorDeCargo _armazenadorDeCargo;
 
@@ -34,21 +35,37 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
 
             _notificacaoDeDominioMock = new Mock<IDomainNotificationHandler>();
             _cargoRepositorioMock = new Mock<ICargoRepositorio>();
+            _editarUmCargoMock = new Mock<IEditarUmCargo>();
 
             _armazenadorDeCargo = new ArmazenadorDeCargo(
                 _notificacaoDeDominioMock.Object,
-                _cargoRepositorioMock.Object
+                _cargoRepositorioMock.Object,
+                _editarUmCargoMock.Object
                 );
         }
-
 
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public async Task DeveNotificarErroDeDominio(string descricaoInvalida)
+        public async Task DeveValidarDominioNaInsercao(string descricaoInvalida)
         {
             _cargoDto.Descricao = descricaoInvalida;
 
+            await _armazenadorDeCargo.ArmazenarAsync(_cargoDto);
+
+            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public async Task DeveValidarDominioNaEdicao(string descricaoInvalido)
+        {
+            _cargoDto.Descricao = descricaoInvalido;
+            _cargoDto.Id = _id;
+
+            MockarAEdicaoDoDto();
+            
             await _armazenadorDeCargo.ArmazenarAsync(_cargoDto);
 
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
@@ -73,35 +90,15 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
                 )), Times.Once);
         }
 
-        [Fact]
-        public async Task DeveEditarADescricaoDoCargo()
+        private void MockarAEdicaoDoDto()
         {
-            var descricaoInicial = _onboardingSIGDB1faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero250);
-            var cargoDoBancoDeDados = CargoBuilder.Novo().ComId(_id).Build();
-            _cargoDto.Id = _id;
+            var cargoDoBancoDeDados = CargoBuilder.Novo().
+                ComId(_id).
+                ComDescricao(_cargoDto.Descricao).
+                Build();
 
-            _cargoRepositorioMock.Setup(_ => _.ObterPorIdAsync(_id)).ReturnsAsync(cargoDoBancoDeDados);
-
-            await _armazenadorDeCargo.ArmazenarAsync(_cargoDto);
-
-            Assert.NotEqual(cargoDoBancoDeDados.Descricao, descricaoInicial);
-            Assert.Equal(cargoDoBancoDeDados.Descricao, _cargoDto.Descricao);
-        }
-
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        public async Task DeveValidarDominioNaEdicao(string descricaoInvalido)
-        {
-            var cargoDoBancoDeDados = CargoBuilder.Novo().ComId(_id).Build();
-            _cargoDto.Descricao = descricaoInvalido;
-            _cargoDto.Id = _id;
-
-            _cargoRepositorioMock.Setup(_ => _.ObterPorIdAsync(_id)).ReturnsAsync(cargoDoBancoDeDados);
-
-            await _armazenadorDeCargo.ArmazenarAsync(_cargoDto);
-
-            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
+            _editarUmCargoMock.Setup(_ => _.EditarAsync(_cargoDto))
+                .ReturnsAsync(cargoDoBancoDeDados);
         }
     }
 }
