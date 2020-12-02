@@ -2,9 +2,6 @@
 using OnboardingSIGDB1.Api._Base.Controllers;
 using OnboardingSIGDB1.Domain.Cargos.Dto;
 using OnboardingSIGDB1.Domain.Cargos.Interfaces;
-using OnboardingSIGDB1.Domain.Cargos.Services;
-using OnboardingSIGDB1.Domain.Funcionarios.Dto;
-using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers

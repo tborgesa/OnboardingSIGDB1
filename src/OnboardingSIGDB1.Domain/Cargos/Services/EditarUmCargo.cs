@@ -13,7 +13,7 @@ namespace OnboardingSIGDB1.Domain.Cargos.Services
     {
         private readonly ICargoRepositorio _cargoRepositorio;
 
-        public EditarUmCargo(IDomainNotificationHandler notificacaoDeDominio, 
+        public EditarUmCargo(IDomainNotificationHandler notificacaoDeDominio,
             ICargoRepositorio cargoRepositorio) : base(notificacaoDeDominio)
         {
             _cargoRepositorio = cargoRepositorio;

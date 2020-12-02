@@ -65,7 +65,7 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
             _cargoDto.Id = _id;
 
             MockarAEdicaoDoDto();
-            
+
             await _armazenadorDeCargo.ArmazenarAsync(_cargoDto);
 
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
