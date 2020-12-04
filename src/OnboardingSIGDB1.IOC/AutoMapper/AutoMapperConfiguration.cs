@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using OnboardingSIGDB1.IOC.AutoMapper.Profiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OnboardingSIGDB1.IOC.AutoMapper
 {

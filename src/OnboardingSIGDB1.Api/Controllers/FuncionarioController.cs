@@ -3,16 +3,20 @@ using OnboardingSIGDB1.Api._Base.Controllers;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
 using System.Threading.Tasks;
+using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
 
 namespace OnboardingSIGDB1.Api.Controllers
 {
     public class FuncionarioController : OnboardingSIGDB1Controller
     {
         private readonly IArmazenadorDeFuncionario _armazenadorDeFuncionario;
+        private readonly IFuncionarioRepositorio _funcionarioRepositorio;
 
-        public FuncionarioController(IArmazenadorDeFuncionario armazenadorDeFuncionario)
+        public FuncionarioController(IArmazenadorDeFuncionario armazenadorDeFuncionario,
+            IFuncionarioRepositorio funcionarioRepositorio)
         {
             _armazenadorDeFuncionario = armazenadorDeFuncionario;
+            _funcionarioRepositorio = funcionarioRepositorio;
         }
 
         [HttpGet]
@@ -25,8 +29,12 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            await Task.CompletedTask;
-            return Ok();
+            var funcionario = await _funcionarioRepositorio.ObterPorIdAsync(id);
+
+            if (funcionario == null)
+                return Ok();
+
+            return Ok(funcionario.MapTo<FuncionarioDto>());
         }
 
         [HttpPost()]
