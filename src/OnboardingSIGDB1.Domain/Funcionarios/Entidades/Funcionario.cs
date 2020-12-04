@@ -2,6 +2,7 @@
 using OnboardingSIGDB1.Domain._Base.Entidades;
 using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Resources;
+using OnboardingSIGDB1.Domain.Empresas.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Resources;
 using System;
 
@@ -12,6 +13,9 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
         public string Nome { get; private set; }
         public string Cpf { get; private set; }
         public DateTime? DataDeContratacao { get; private set; }
+
+        public int? EmpresaId { get; private set; }
+        public Empresa Empresa { get; private set; }
 
         public Funcionario(string nome, string cpf, DateTime? dataDeContratacao)
         {

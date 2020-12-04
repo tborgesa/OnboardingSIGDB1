@@ -3,7 +3,9 @@ using OnboardingSIGDB1.Domain._Base.Entidades;
 using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Resources;
+using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using System;
+using System.Collections.Generic;
 
 namespace OnboardingSIGDB1.Domain.Empresas.Entidades
 {
@@ -12,6 +14,8 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
         public string Nome { get; private set; }
         public string Cnpj { get; private set; }
         public DateTime? DataDeFundacao { get; private set; }
+
+        public List<Funcionario> ListaDeFuncionarios { get; private set; }
 
         public Empresa(string nome, string cnpj, DateTime? dataDeFundacao)
         {
