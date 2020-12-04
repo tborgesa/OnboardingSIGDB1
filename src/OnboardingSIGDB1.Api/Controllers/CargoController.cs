@@ -2,6 +2,7 @@
 using OnboardingSIGDB1.Api._Base.Controllers;
 using OnboardingSIGDB1.Domain.Cargos.Dto;
 using OnboardingSIGDB1.Domain.Cargos.Interfaces;
+using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers
@@ -9,10 +10,13 @@ namespace OnboardingSIGDB1.Api.Controllers
     public class CargoController : OnboardingSIGDB1Controller
     {
         private readonly IArmazenadorDeCargo _armazenadorDeCargo;
+        private readonly ICargoRepositorio _cargoRepositorio;
 
-        public CargoController(IArmazenadorDeCargo armazenadorDeCargo)
+        public CargoController(IArmazenadorDeCargo armazenadorDeCargo,
+            ICargoRepositorio cargoRepositorio)
         {
             _armazenadorDeCargo = armazenadorDeCargo;
+            _cargoRepositorio = cargoRepositorio;
         }
 
         [HttpGet]
@@ -25,8 +29,12 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            await Task.CompletedTask;
-            return Ok();
+            var cargo = await _cargoRepositorio.ObterPorIdAsync(id);
+
+            if (cargo == null)
+                return Ok();
+
+            return Ok(cargo.MapTo<CargoDto>());
         }
 
         [HttpPost()]

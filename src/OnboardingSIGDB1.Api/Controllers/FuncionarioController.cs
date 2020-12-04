@@ -2,8 +2,8 @@
 using OnboardingSIGDB1.Api._Base.Controllers;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
-using System.Threading.Tasks;
 using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
+using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers
 {
