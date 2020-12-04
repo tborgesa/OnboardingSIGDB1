@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnboardingSIGDB1.Api._Base.Controllers;
+using OnboardingSIGDB1.Api.Models.Cargos;
 using OnboardingSIGDB1.Domain.Cargos.Dto;
 using OnboardingSIGDB1.Domain.Cargos.Interfaces;
+using OnboardingSIGDB1.Domain.Cargos.Specifications;
 using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers
@@ -19,11 +22,14 @@ namespace OnboardingSIGDB1.Api.Controllers
             _cargoRepositorio = cargoRepositorio;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpPost("ObterComFiltro")]
+        public async Task<IActionResult> ObterComFiltro(CargoFiltro cargoFiltro)
         {
-            await Task.CompletedTask;
-            return Ok();
+            var cargos = await _cargoRepositorio.BuscarAsync(ObterOsCargosSpecification.Novo().
+                ComDescricao(cargoFiltro.Descricao)
+                .Build());
+
+            return Ok(cargos.MapTo<List<CargoDto>>());
         }
 
         [HttpGet("{id}")]
