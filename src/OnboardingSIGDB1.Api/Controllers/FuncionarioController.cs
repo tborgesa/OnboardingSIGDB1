@@ -25,7 +25,7 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpPost("ObterComFiltro")]
         public async Task<IActionResult> ObterComFiltro(FuncionarioFiltro funcionarioFiltro)
         {
-            var funcionarios = await _funcionarioRepositorio.BuscarAsync(ObterOsFuncionarioSpecification.
+            var funcionarios = await _funcionarioRepositorio.BuscarAsync(ObterOsFuncionariosSpecification.
                 Novo().
                 ComNome(funcionarioFiltro.Nome).
                 ComCpf(funcionarioFiltro.Cpf).

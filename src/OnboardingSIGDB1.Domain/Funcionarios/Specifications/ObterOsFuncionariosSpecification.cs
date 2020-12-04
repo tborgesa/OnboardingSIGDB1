@@ -6,18 +6,18 @@ using System.Linq.Expressions;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Specifications
 {
-    public class ObterOsFuncionarioSpecification
+    public class ObterOsFuncionariosSpecification
     {
         private readonly IList<Expression<Func<Funcionario, bool>>> _filtros;
 
-        private ObterOsFuncionarioSpecification()
+        private ObterOsFuncionariosSpecification()
         {
             _filtros = new List<Expression<Func<Funcionario, bool>>>();
         }
 
-        public static ObterOsFuncionarioSpecification Novo() => new ObterOsFuncionarioSpecification();
+        public static ObterOsFuncionariosSpecification Novo() => new ObterOsFuncionariosSpecification();
 
-        public ObterOsFuncionarioSpecification ComNome(string nome)
+        public ObterOsFuncionariosSpecification ComNome(string nome)
         {
             if (!string.IsNullOrEmpty(nome))
                 _filtros.Add(_ => _.Nome.ToLower().Contains(nome.ToLower()));
@@ -25,7 +25,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Specifications
             return this;
         }
 
-        public ObterOsFuncionarioSpecification ComCpf(string cpf)
+        public ObterOsFuncionariosSpecification ComCpf(string cpf)
         {
             if (!string.IsNullOrEmpty(cpf))
                 _filtros.Add(_ => _.Cpf == cpf.RemoverMascaraDoCpf());
@@ -33,7 +33,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Specifications
             return this;
         }
 
-        public ObterOsFuncionarioSpecification ComIntervaloDeDataDeContratacao(DateTime dataInicial, DateTime dataFinal)
+        public ObterOsFuncionariosSpecification ComIntervaloDeDataDeContratacao(DateTime dataInicial, DateTime dataFinal)
         {
             if (dataInicial > DateTime.MinValue && dataFinal > DateTime.MinValue)
                 _filtros.Add(_ => _.DataDeContratacao.HasValue &&

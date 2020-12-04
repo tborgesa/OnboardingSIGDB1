@@ -8,4 +8,8 @@
     <PackageReference Include="FluentValidation" Version="7.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Cargos\Specifications\" />
+  </ItemGroup>
+
 </Project>
