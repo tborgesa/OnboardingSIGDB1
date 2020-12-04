@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnboardingSIGDB1.Domain._Base.Entidades;
+using OnboardingSIGDB1.Domain._Base.Helpers;
 using OnboardingSIGDB1.Domain._Base.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace OnboardingSIGDB1.Data._Base
         public async Task AdicionarAsync(TEntidade entidade) => await DbSet.AddAsync(entidade);
 
         public async Task<IEnumerable<TEntidade>> BuscarAsync(Expression<Func<TEntidade, bool>> predicate) => await DbSet.Where(predicate).ToListAsync();
+
+        public async Task<IEnumerable<TEntidade>> BuscarAsync(IEnumerable<Expression<Func<TEntidade, bool>>> predicate) => await DbSet.FiltrarUmaListaDeWhere(predicate).ToListAsync();
 
         public async Task<IEnumerable<TEntidade>> ListarAsync() => await DbSet.ToListAsync();
 

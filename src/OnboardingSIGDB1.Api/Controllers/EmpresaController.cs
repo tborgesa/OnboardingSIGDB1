@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnboardingSIGDB1.Api._Base.Controllers;
+using OnboardingSIGDB1.Api.Models.Empresas;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
+using OnboardingSIGDB1.Domain.Empresas.Specifications;
 using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers
@@ -19,11 +22,16 @@ namespace OnboardingSIGDB1.Api.Controllers
             _empresaRepositorio = empresaRepositorio;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpPost("ObterComFiltro")]
+        public async Task<IActionResult> ObterComFiltro(EmpresaFiltro empresaFiltro)
         {
-            await Task.CompletedTask;
-            return Ok();
+            var empresas = await _empresaRepositorio.BuscarAsync(ObterAsEmpresasSpecification.Novo().
+                ComNome(empresaFiltro.Nome).
+                ComCnpj(empresaFiltro.Cnpj).
+                ComIntervaloDeDataDeFundacao(empresaFiltro.DataDeFundacaoFinal, empresaFiltro.DataDeFundacaoFinal)
+                .Build());
+
+            return Ok(empresas.MapTo<List<EmpresaDto>>());
         }
 
         [HttpGet("{id}")]
