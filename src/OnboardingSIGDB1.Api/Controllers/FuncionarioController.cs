@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnboardingSIGDB1.Api._Base.Controllers;
+using OnboardingSIGDB1.Api.Models.Funcionarios;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
+using OnboardingSIGDB1.Domain.Funcionarios.Specifications;
 using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers
@@ -19,11 +22,17 @@ namespace OnboardingSIGDB1.Api.Controllers
             _funcionarioRepositorio = funcionarioRepositorio;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpPost("ObterComFiltro")]
+        public async Task<IActionResult> ObterComFiltro(FuncionarioFiltro funcionarioFiltro)
         {
-            await Task.CompletedTask;
-            return Ok();
+            var funcionarios = await _funcionarioRepositorio.BuscarAsync(ObterOsFuncionarioSpecification.
+                Novo().
+                ComNome(funcionarioFiltro.Nome).
+                ComCpf(funcionarioFiltro.Cpf).
+                ComIntervaloDeDataDeContratacao(funcionarioFiltro.DataDeContratacaoInicial, funcionarioFiltro.DataDeContratacaoFinal).
+                Build());
+
+            return Ok(funcionarios.MapTo<List<FuncionarioDto>>());
         }
 
         [HttpGet("{id}")]
