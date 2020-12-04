@@ -25,7 +25,7 @@ namespace OnboardingSIGDB1.Api._Base.Middlewares
 
             if (notificacaoDeDominio.HasNotifications) return;
 
-            unitOfWork.Commit();
+            await unitOfWork.CommitAsync();
         }
     }
 }

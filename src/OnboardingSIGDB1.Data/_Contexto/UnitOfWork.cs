@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnboardingSIGDB1.Domain._Base.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Data._Contexto
 {
@@ -13,12 +14,12 @@ namespace OnboardingSIGDB1.Data._Contexto
             _onboardingSIGDB1Context = onboardingSIGDB1Context;
         }
 
-        public void Commit()
+        public async Task CommitAsync()
         {
-            _onboardingSIGDB1Context.SaveChanges();
+           await _onboardingSIGDB1Context.SaveChangesAsync();
         }
 
-        public void RoolBack()
+        public async Task RoolBackAsync()
         {
             var entries = _onboardingSIGDB1Context.ChangeTracker
                 .Entries()
@@ -40,6 +41,9 @@ namespace OnboardingSIGDB1.Data._Contexto
                         break;
                 }
             }
+
+            await Task.CompletedTask;
+
         }
     }
 }

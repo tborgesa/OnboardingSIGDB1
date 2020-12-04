@@ -1,8 +1,10 @@
-﻿namespace OnboardingSIGDB1.Domain._Base.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace OnboardingSIGDB1.Domain._Base.Interfaces
 {
     public interface IUnitOfWork
     {
-        void Commit();
-        void RoolBack();
+        Task CommitAsync();
+        Task RoolBackAsync();
     }
 }
