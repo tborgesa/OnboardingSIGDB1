@@ -2,6 +2,7 @@
 {
     public static class Constantes
     {
+        public const int Numero0 = 0;
         public const int Numero1 = 1;
 
         public const int Numero11 = 11;
