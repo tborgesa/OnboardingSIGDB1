@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Services
 {
-    public class VinculadorDeFuncionarioNaEmpresa : OnboardingSIGDB1Service
+    public class VinculadorDeFuncionarioNaEmpresa : OnboardingSIGDB1Service, IVinculadorDeFuncionarioNaEmpresa
     {
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
         private readonly IEmpresaRepositorio _empresaRepositorio;

@@ -14,12 +14,15 @@ namespace OnboardingSIGDB1.Api.Controllers
     {
         private readonly IArmazenadorDeFuncionario _armazenadorDeFuncionario;
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
+        private readonly IVinculadorDeFuncionarioNaEmpresa _vinculadorDeFuncionarioNaEmpresa;
 
         public FuncionarioController(IArmazenadorDeFuncionario armazenadorDeFuncionario,
-            IFuncionarioRepositorio funcionarioRepositorio)
+            IFuncionarioRepositorio funcionarioRepositorio,
+            IVinculadorDeFuncionarioNaEmpresa vinculadorDeFuncionarioNaEmpresa)
         {
             _armazenadorDeFuncionario = armazenadorDeFuncionario;
             _funcionarioRepositorio = funcionarioRepositorio;
+            _vinculadorDeFuncionarioNaEmpresa = vinculadorDeFuncionarioNaEmpresa;
         }
 
         [HttpPost("ObterComFiltro")]
@@ -59,6 +62,14 @@ namespace OnboardingSIGDB1.Api.Controllers
         {
             funcionarioDto.Id = id;
             await _armazenadorDeFuncionario.ArmazenarAsync(funcionarioDto);
+
+            return Ok();
+        }
+
+        [HttpPut("VincularNaEmpresa/{funcionarioId}/{empresaId}")]
+        public async Task<IActionResult> Put(int funcionarioId, int empresaId)
+        {
+            await _vinculadorDeFuncionarioNaEmpresa.Vincular(funcionarioId, empresaId);
 
             return Ok();
         }
