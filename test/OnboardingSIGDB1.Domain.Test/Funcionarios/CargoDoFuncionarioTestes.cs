@@ -104,7 +104,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         public void NaoDeveAceitarFuncionarioSemEmpresa()
         {
             var funcionarioSemEmpresa = FuncionarioBuilder.Novo().ComId(_onboardingSIGDB1faker.Id()).Build();
-            
+
             var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().ComFuncionario(funcionarioSemEmpresa).Build();
 
             Assert.False(cargoDoFuncionario.Validar());

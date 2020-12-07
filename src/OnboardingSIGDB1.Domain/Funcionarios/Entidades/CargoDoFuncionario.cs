@@ -4,7 +4,6 @@ using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Cargos.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Resources;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades

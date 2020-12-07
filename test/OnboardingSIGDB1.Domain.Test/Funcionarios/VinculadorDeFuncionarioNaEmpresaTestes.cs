@@ -90,6 +90,5 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeServicoAsync(It.Is<string>(_1 => _1 == EmpresaResources.EmpresaNaoExiste)));
         }
-
     }
 }

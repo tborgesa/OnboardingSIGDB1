@@ -16,5 +16,15 @@ namespace OnboardingSIGDB1.Data.Funcionarios
         {
             return DbSet.FirstOrDefaultAsync(_ => _.Cpf == cpf);
         }
+
+        public Task AdicionarCargoParaFuncionarioAsync(CargoDoFuncionario cargoDoFuncionario)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Funcionario> ObterFuncionariosComEmpresaECargosAsync(int funcionarioId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
