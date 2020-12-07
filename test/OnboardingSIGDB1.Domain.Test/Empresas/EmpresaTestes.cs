@@ -24,13 +24,15 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
         }
 
         [Fact]
-        public void DeveCriarEmpresa()
+        public void DeveCriarEmpresaValida()
         {
             var empresa = new Empresa(_nome, _cnpj, _dataDeFundacao);
 
             Assert.Equal(_nome, empresa.Nome);
             Assert.Equal(_cnpj.RemoverMascaraDoCnpj(), empresa.Cnpj);
             Assert.Equal(_dataDeFundacao, empresa.DataDeFundacao);
+
+            Assert.True(empresa.Validar());
         }
 
         [Theory]

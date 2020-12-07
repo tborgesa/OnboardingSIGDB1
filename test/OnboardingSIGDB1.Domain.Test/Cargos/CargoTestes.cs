@@ -18,11 +18,13 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
         }
 
         [Fact]
-        public void DeveCriarCargo()
+        public void DeveCriarCargoValido()
         {
             var cargo = new Cargo(_descricao);
 
             Assert.Equal(_descricao, cargo.Descricao);
+
+            Assert.True(cargo.Validar());
         }
 
         [Theory]

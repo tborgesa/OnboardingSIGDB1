@@ -21,6 +21,7 @@ namespace OnboardingSIGDB1.Domain.Test._Builders
             _nome = faker.FraseComQuantidadeExataDeCaracteres(Constantes.Numero150);
             _cpf = faker.Cpf();
             _dataDeContratacao = faker.QualquerDataDoUltimoAno();
+            _empresa = null;
 
             return new FuncionarioBuilder();
         }
@@ -65,6 +66,7 @@ namespace OnboardingSIGDB1.Domain.Test._Builders
 
             propriedadeEmpresa.SetValue(funcionario, _empresa);
             propriedadeEmpresaId.SetValue(funcionario, _empresa?.Id);
+
         }
 
         public Funcionario Build()

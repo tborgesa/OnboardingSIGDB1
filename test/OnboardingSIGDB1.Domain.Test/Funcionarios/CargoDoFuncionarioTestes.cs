@@ -20,12 +20,13 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
             _onboardingSIGDB1faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
             _dataDeVinvulo = _onboardingSIGDB1faker.QualquerDataDoUltimoAno();
 
-            _funcionario = FuncionarioBuilder.Novo().ComId(_onboardingSIGDB1faker.Id()).Build();
+            var empresa = EmpresaBuilder.Novo().ComId(_onboardingSIGDB1faker.Id()).Build();
+            _funcionario = FuncionarioBuilder.Novo().ComId(_onboardingSIGDB1faker.Id()).ComEmpresa(empresa).Build();
             _cargo = CargoBuilder.Novo().ComId(_onboardingSIGDB1faker.Id()).Build();
         }
 
         [Fact]
-        public void DeveCriarOCargoDoFuncionario()
+        public void DeveCriarOCargoDoFuncionarioValido()
         {
             var cargoDoFuncionario = new CargoDoFuncionario(_funcionario, _cargo, _dataDeVinvulo);
 
@@ -36,6 +37,8 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
             Assert.Equal(_cargo.Id, cargoDoFuncionario.CargoId);
 
             Assert.Equal(_dataDeVinvulo, cargoDoFuncionario.DataDeVinculo);
+
+            Assert.True(cargoDoFuncionario.Validar());
         }
 
         [Fact]
@@ -43,7 +46,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         {
             Funcionario funcionarioInvalido = null;
 
-            var cargoDoFuncionario = new CargoDoFuncionario(funcionarioInvalido, _cargo, _dataDeVinvulo);
+            var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().ComFuncionario(funcionarioInvalido).Build();
 
             Assert.False(cargoDoFuncionario.Validar());
         }
@@ -53,7 +56,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         {
             var funcionarioInvalido = FuncionarioBuilder.Novo().Build();
 
-            var cargoDoFuncionario = new CargoDoFuncionario(funcionarioInvalido, _cargo, _dataDeVinvulo);
+            var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().ComFuncionario(funcionarioInvalido).Build();
 
             Assert.False(cargoDoFuncionario.Validar());
         }
@@ -63,7 +66,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         {
             Cargo cargoInvalido = null;
 
-            var cargoDoFuncionario = new CargoDoFuncionario(_funcionario, cargoInvalido, _dataDeVinvulo);
+            var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().ComCargo(cargoInvalido).Build();
 
             Assert.False(cargoDoFuncionario.Validar());
         }
@@ -73,7 +76,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         {
             var cargoInvalido = CargoBuilder.Novo().Build();
 
-            var cargoDoFuncionario = new CargoDoFuncionario(_funcionario, cargoInvalido, _dataDeVinvulo);
+            var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().ComCargo(cargoInvalido).Build();
 
             Assert.False(cargoDoFuncionario.Validar());
         }
@@ -83,7 +86,26 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         {
             var dataInvalida = DateTime.MinValue;
 
-            var cargoDoFuncionario = new CargoDoFuncionario(_funcionario, _cargo, dataInvalida);
+            var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().ComDataDeVinculo(dataInvalida).Build();
+
+            Assert.False(cargoDoFuncionario.Validar());
+        }
+
+        [Fact]
+        public void NaoDeveAceitarCargoRepetidosParaOMesmoFuncionario()
+        {
+            var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().Build();
+            cargoDoFuncionario.Funcionario.AdicionarCargo(cargoDoFuncionario);
+
+            Assert.False(cargoDoFuncionario.Validar());
+        }
+
+        [Fact]
+        public void NaoDeveAceitarFuncionarioSemEmpresa()
+        {
+            var funcionarioSemEmpresa = FuncionarioBuilder.Novo().ComId(_onboardingSIGDB1faker.Id()).Build();
+            
+            var cargoDoFuncionario = CargoDoFuncionarioBuilder.Novo().ComFuncionario(funcionarioSemEmpresa).Build();
 
             Assert.False(cargoDoFuncionario.Validar());
         }

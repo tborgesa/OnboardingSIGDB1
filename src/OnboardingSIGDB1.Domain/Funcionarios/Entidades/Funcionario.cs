@@ -25,6 +25,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
             Nome = nome;
             Cpf = cpf.RemoverMascaraDoCpf();
             DataDeContratacao = dataDeContratacao;
+            ListaDeCargos = new List<CargoDoFuncionario>();
         }
 
         private bool DeveSerCpfValido(string cpf)
@@ -81,6 +82,11 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
         {
             Empresa = empresa;
             EmpresaId = empresa.Id;
+        }
+
+        public void AdicionarCargo(CargoDoFuncionario cargoDoFuncionario)
+        {
+            ListaDeCargos.Add(cargoDoFuncionario);
         }
     }
 }

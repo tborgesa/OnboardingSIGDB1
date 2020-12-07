@@ -4,6 +4,8 @@ using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Cargos.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Resources;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
 {
@@ -30,6 +32,11 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
             DataDeVinculo = dataDeVinculo;
         }
 
+        private bool DeveSerCargoUnico(Funcionario funcionario)
+        {
+            return funcionario == null || !funcionario.ListaDeCargos.Any(_ => _.CargoId == CargoId);
+        }
+
         public override bool Validar()
         {
             RuleFor(_ => _.CargoId)
@@ -41,6 +48,14 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
             RuleFor(_ => _.DataDeVinculo)
                 .Must(_ => _ > DateTime.MinValue)
                 .WithMessage(Resource.FormatarResourceToLowerValor2(Resource.MensagemDeCampoInvalido, FuncionarioResources.DataDeVinculo));
+
+            RuleFor(_ => Funcionario)
+               .Must(DeveSerCargoUnico)
+               .WithMessage(FuncionarioResources.FuncionarioJaFoiVinculadoNoCargo);
+
+            RuleFor(_ => Funcionario)
+               .Must(_ => _?.EmpresaId > Constantes.Numero0)
+               .WithMessage(FuncionarioResources.FuncionarioSemEmpresaVinculado);
 
             ValidationResult = Validate(this);
             return ValidationResult.IsValid;

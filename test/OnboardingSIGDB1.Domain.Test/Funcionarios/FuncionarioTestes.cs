@@ -24,13 +24,15 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         }
 
         [Fact]
-        public void DeveCriarFuncionario()
+        public void DeveCriarFuncionarioValido()
         {
             var funcionario = new Funcionario(_nome, _cpf, _dataDeContratacao);
 
             Assert.Equal(_nome, funcionario.Nome);
             Assert.Equal(_cpf.RemoverMascaraDoCpf(), funcionario.Cpf);
             Assert.Equal(_dataDeContratacao, funcionario.DataDeContratacao);
+
+            Assert.True(funcionario.Validar());
         }
 
         [Theory]
