@@ -1,5 +1,4 @@
 ﻿using OnboardingSIGDB1.Domain._Base.Interfaces;
-using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
@@ -25,10 +24,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Services
             var empresa = await _empresaRepositorio.ObterPorIdAsync(empresaDto.Id);
 
             if (empresa == null)
-                await NotificacaoDeDominio.HandleNotificacaoDeDominioAsync(
-                         Resource.FormatarResource(
-                             Resource.MensagemNaoExisteNoBancoDeDadosFeminino, EmpresaResources.Empresa)
-                         );
+                await NotificacaoDeDominio.HandleNotificacaoDeDominioAsync(EmpresaResources.EmpresaNaoExiste);
 
             empresa?.AlterarNome(empresaDto.Nome);
             empresa?.AlterarCnpj(empresaDto.Cnpj);

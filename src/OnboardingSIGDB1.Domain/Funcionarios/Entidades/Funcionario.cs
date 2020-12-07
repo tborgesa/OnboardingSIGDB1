@@ -49,6 +49,16 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
             return ValidationResult.IsValid;
         }
 
+        internal bool ValidarOVinculoComEmpresa()
+        {
+            RuleFor(_ => _.EmpresaId)
+                 .Null()
+                 .WithMessage(FuncionarioResources.FuncionarioJaEstaVinculadoAEmpresa);
+
+            ValidationResult = Validate(this);
+            return ValidationResult.IsValid;
+        }
+
         public void AlterarNome(string nome)
         {
             Nome = nome;
@@ -62,6 +72,12 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
         public void AlterarDataDeContratacao(DateTime dataDeContratacao)
         {
             DataDeContratacao = dataDeContratacao;
+        }
+
+        public void VincularComEmpresa(Empresa empresa)
+        {
+            Empresa = empresa;
+            EmpresaId = empresa.Id;
         }
     }
 }

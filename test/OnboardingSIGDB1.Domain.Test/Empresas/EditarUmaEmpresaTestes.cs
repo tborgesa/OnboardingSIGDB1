@@ -4,6 +4,7 @@ using OnboardingSIGDB1.Domain._Base.Interfaces;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Dto;
 using OnboardingSIGDB1.Domain.Empresas.Interfaces;
+using OnboardingSIGDB1.Domain.Empresas.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Services;
 using OnboardingSIGDB1.Domain.Test._Builders;
 using OnboardingSIGDB1.Domain.Test._Comum;
@@ -98,7 +99,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
 
             await _editarUmaEmpresa.EditarAsync(_empresaDto);
 
-            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
+            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.Is<string>(_1 => _1 == EmpresaResources.EmpresaNaoExiste)));
         }
     }
 }

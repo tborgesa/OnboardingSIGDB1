@@ -4,6 +4,7 @@ using OnboardingSIGDB1.Domain._Base.Interfaces;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
+using OnboardingSIGDB1.Domain.Funcionarios.Resources;
 using OnboardingSIGDB1.Domain.Funcionarios.Services;
 using OnboardingSIGDB1.Domain.Test._Builders;
 using OnboardingSIGDB1.Domain.Test._Comum;
@@ -96,7 +97,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
             await _editarUmFuncionario.EditarAsync(_funcionarioDto);
 
-            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
+            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeServicoAsync(It.Is<string>(_1 => _1 == FuncionarioResources.FuncionarioNaoExiste)));
         }
     }
 }

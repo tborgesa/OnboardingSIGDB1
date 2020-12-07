@@ -1,5 +1,4 @@
 ﻿using OnboardingSIGDB1.Domain._Base.Interfaces;
-using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
@@ -24,10 +23,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
             var funcionario = await _funcionarioRepositorio.ObterPorIdAsync(funcionarioDto.Id);
 
             if (funcionario == null)
-                await NotificacaoDeDominio.HandleNotificacaoDeDominioAsync(
-                         Resource.FormatarResource(
-                             Resource.MensagemNaoExisteNoBancoDeDadosMasculino, FuncionarioResources.Funcionario)
-                         );
+                await NotificacaoDeDominio.HandleNotificacaoDeServicoAsync(FuncionarioResources.FuncionarioNaoExiste);
 
             funcionario?.AlterarNome(funcionarioDto.Nome);
             funcionario?.AlterarCpf(funcionarioDto.Cpf);

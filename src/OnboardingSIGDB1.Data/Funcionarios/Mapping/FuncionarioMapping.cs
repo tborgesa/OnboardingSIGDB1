@@ -18,7 +18,7 @@ namespace OnboardingSIGDB1.Data.Funcionarios.Mapping
                OnDelete(DeleteBehavior.Restrict);
 
             builder.Ignore(_ => _.ValidationResult);
-            builder.Ignore(_ => _.CascadeMode);           
+            builder.Ignore(_ => _.CascadeMode);
         }
     }
 }
