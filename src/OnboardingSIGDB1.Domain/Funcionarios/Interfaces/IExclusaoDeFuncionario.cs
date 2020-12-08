@@ -4,6 +4,6 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Interfaces
 {
     public interface IExclusaoDeFuncionario
     {
-        Task ExcluirAsync(int idFuncionario);
+        Task ExcluirAsync(int funcionarioId);
     }
 }
