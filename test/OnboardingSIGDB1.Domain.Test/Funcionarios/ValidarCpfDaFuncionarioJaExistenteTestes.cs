@@ -14,7 +14,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
     public class ValidarCpfDaFuncionarioJaExistenteTestes
     {
         private readonly Mock<IFuncionarioRepositorio> _funcionarioRepositorio;
-        private readonly ValidadorCpfDaFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;
+        private readonly ValidadorCpfDeFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;
         private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
 
         private readonly string _cpf;
@@ -34,7 +34,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
             _funcionarioRepositorio = new Mock<IFuncionarioRepositorio>();
             _notificacaoDeDominioMock = new Mock<IDomainNotificationHandler>();
-            _validadorCpfDaFuncionarioJaExistente = new ValidadorCpfDaFuncionarioJaExistente(
+            _validadorCpfDaFuncionarioJaExistente = new ValidadorCpfDeFuncionarioJaExistente(
                 _notificacaoDeDominioMock.Object,
                 _funcionarioRepositorio.Object);
         }

@@ -10,13 +10,13 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
     public class ArmazenadorDeFuncionario : OnboardingSIGDB1Service, IArmazenadorDeFuncionario
     {
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
-        private readonly IValidadorCpfDaFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;
+        private readonly IValidadorCpfDeFuncionarioJaExistente _validadorCpfDaFuncionarioJaExistente;
         private readonly IEditarUmFuncionario _editarUmFuncionario;
 
         public ArmazenadorDeFuncionario(
             IDomainNotificationHandler notificacaoDeDominio,
             IFuncionarioRepositorio funcionarioRepositorio,
-            IValidadorCpfDaFuncionarioJaExistente validadorCpfDaFuncionarioJaExistente,
+            IValidadorCpfDeFuncionarioJaExistente validadorCpfDaFuncionarioJaExistente,
             IEditarUmFuncionario editarUmFuncionario) : base(notificacaoDeDominio)
         {
             _funcionarioRepositorio = funcionarioRepositorio;

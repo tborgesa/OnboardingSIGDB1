@@ -21,7 +21,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
         private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
         private readonly Mock<IFuncionarioRepositorio> _funcionarioRepositorioMock;
-        private readonly Mock<IValidadorCpfDaFuncionarioJaExistente> _validadorCpfDaFuncionarioJaExistenteMock;
+        private readonly Mock<IValidadorCpfDeFuncionarioJaExistente> _validadorCpfDaFuncionarioJaExistenteMock;
         private readonly Mock<IEditarUmFuncionario> _editarUmFuncionarioMock;
         private readonly ArmazenadorDeFuncionario _armazenadorDeFuncionario;
 
@@ -39,7 +39,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
             _notificacaoDeDominioMock = new Mock<IDomainNotificationHandler>();
             _funcionarioRepositorioMock = new Mock<IFuncionarioRepositorio>();
-            _validadorCpfDaFuncionarioJaExistenteMock = new Mock<IValidadorCpfDaFuncionarioJaExistente>();
+            _validadorCpfDaFuncionarioJaExistenteMock = new Mock<IValidadorCpfDeFuncionarioJaExistente>();
             _editarUmFuncionarioMock = new Mock<IEditarUmFuncionario>();
 
             _armazenadorDeFuncionario = new ArmazenadorDeFuncionario(

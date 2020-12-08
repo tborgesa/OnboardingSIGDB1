@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Services
 {
-    public class ValidadorCpfDaFuncionarioJaExistente : OnboardingSIGDB1Service, IValidadorCpfDaFuncionarioJaExistente
+    public class ValidadorCpfDeFuncionarioJaExistente : OnboardingSIGDB1Service, IValidadorCpfDeFuncionarioJaExistente
     {
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
 
-        public ValidadorCpfDaFuncionarioJaExistente(
+        public ValidadorCpfDeFuncionarioJaExistente(
             IDomainNotificationHandler notificacaoDeDominio,
             IFuncionarioRepositorio funcionarioRepositorio) : base(notificacaoDeDominio)
         {
