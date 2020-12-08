@@ -2,6 +2,8 @@
 {
     public static class Constantes
     {
+        public const bool Verdadeiro = true;
+
         public const int Numero0 = 0;
         public const int Numero1 = 1;
 

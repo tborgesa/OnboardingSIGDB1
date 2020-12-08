@@ -16,16 +16,19 @@ namespace OnboardingSIGDB1.Api.Controllers
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
         private readonly IVinculadorDeFuncionarioNaEmpresa _vinculadorDeFuncionarioNaEmpresa;
         private readonly IVinculadorDeFuncionarioNoCargo _vinculadorDeFuncionarioNoCargo;
+        private readonly IExclusaoDeFuncionario _exclusaoDeFuncionario;
 
         public FuncionarioController(IArmazenadorDeFuncionario armazenadorDeFuncionario,
             IFuncionarioRepositorio funcionarioRepositorio,
             IVinculadorDeFuncionarioNaEmpresa vinculadorDeFuncionarioNaEmpresa,
-            IVinculadorDeFuncionarioNoCargo vinculadorDeFuncionarioNoCargo)
+            IVinculadorDeFuncionarioNoCargo vinculadorDeFuncionarioNoCargo,
+            IExclusaoDeFuncionario exclusaoDeFuncionario)
         {
             _armazenadorDeFuncionario = armazenadorDeFuncionario;
             _funcionarioRepositorio = funcionarioRepositorio;
             _vinculadorDeFuncionarioNaEmpresa = vinculadorDeFuncionarioNaEmpresa;
             _vinculadorDeFuncionarioNoCargo = vinculadorDeFuncionarioNoCargo;
+            _exclusaoDeFuncionario = exclusaoDeFuncionario;
         }
 
         [HttpPost("ObterComFiltro")]
@@ -88,7 +91,8 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await Task.CompletedTask;
+            await _exclusaoDeFuncionario.ExcluirAsync(id);
+
             return Ok();
         }
     }

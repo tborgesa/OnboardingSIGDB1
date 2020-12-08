@@ -97,7 +97,9 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
             await _editarUmFuncionario.EditarAsync(_funcionarioDto);
 
-            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeServicoAsync(It.Is<string>(_1 => _1 == FuncionarioResources.FuncionarioNaoExiste)));
+            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeServicoAsync(It.Is<string>(
+                _1 => _1 == FuncionarioResources.FuncionarioNaoExiste
+                )));
         }
     }
 }
