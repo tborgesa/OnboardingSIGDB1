@@ -17,7 +17,7 @@ namespace OnboardingSIGDB1.Api.Controllers
         private readonly IExclusaoDeEmpresa _exclusaoDeEmpresa;
 
         public EmpresaController(IArmazenadorDeEmpresa armazenadorDeEmpresa,
-            IEmpresaRepositorio empresaRepositorio, 
+            IEmpresaRepositorio empresaRepositorio,
             IExclusaoDeEmpresa exclusaoDeEmpresa)
         {
             _armazenadorDeEmpresa = armazenadorDeEmpresa;
