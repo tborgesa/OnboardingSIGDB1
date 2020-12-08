@@ -49,24 +49,11 @@ namespace OnboardingSIGDB1.Domain.Test._Builders
             _dataDeContratacao = dataDeContratacao;
             return this;
         }
+
         public FuncionarioBuilder ComEmpresa(Empresa empresa)
         {
             _empresa = empresa;
             return this;
-        }
-
-        private void AtribuirEmpresa(Funcionario funcionario)
-        {
-            if (_empresa == null) return;
-
-            var typeDoFuncionario = funcionario.GetType();
-
-            var propriedadeEmpresa = typeDoFuncionario.GetProperty("Empresa");
-            var propriedadeEmpresaId = typeDoFuncionario.GetProperty("EmpresaId");
-
-            propriedadeEmpresa.SetValue(funcionario, _empresa);
-            propriedadeEmpresaId.SetValue(funcionario, _empresa?.Id);
-
         }
 
         public Funcionario Build()
@@ -79,5 +66,12 @@ namespace OnboardingSIGDB1.Domain.Test._Builders
             return funcionario;
         }
 
+        private void AtribuirEmpresa(Funcionario funcionario)
+        {
+            if (_empresa == null) return;
+
+            Atribuir(_empresa, "Empresa", funcionario);
+            Atribuir(_empresa.Id, "EmpresaId", funcionario);
+        }
     }
 }

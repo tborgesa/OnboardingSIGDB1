@@ -1,7 +1,6 @@
 ﻿using OnboardingSIGDB1.Domain._Base.Interfaces;
 using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
-using System;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Services
@@ -20,7 +19,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
             _validadorDeExclusaoDeFuncionario = validadorDeExclusaoDeFuncionario;
         }
 
-     public async Task ExcluirAsync(int funcionarioId)
+        public async Task ExcluirAsync(int funcionarioId)
         {
             await _validadorDeExclusaoDeFuncionario.ValidarAsync(funcionarioId);
 

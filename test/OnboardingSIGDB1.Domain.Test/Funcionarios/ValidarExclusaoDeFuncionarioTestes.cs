@@ -11,7 +11,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 {
     public class ValidarExclusaoDeFuncionarioTestes
     {
-        private readonly int _idFuncionario;
+        private readonly int _funcionarioId;
 
         private readonly Mock<IDomainNotificationHandler> _notificacaoDeDominioMock;
         private readonly Mock<IFuncionarioRepositorio> _funcionarioRepositorioMock;
@@ -20,7 +20,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         public ValidarExclusaoDeFuncionarioTestes()
         {
             var onboardingSIGDB1faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
-            _idFuncionario = onboardingSIGDB1faker.Id();
+            _funcionarioId = onboardingSIGDB1faker.Id();
 
             _notificacaoDeDominioMock = new Mock<IDomainNotificationHandler>();
             _funcionarioRepositorioMock = new Mock<IFuncionarioRepositorio>();
@@ -34,7 +34,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         [Fact]
         public async Task DeveNotificarQuandoFuncionarioNaoExistir()
         {
-            await _validadorDeExclusaoDeFuncionario.ValidarAsync(_idFuncionario);
+            await _validadorDeExclusaoDeFuncionario.ValidarAsync(_funcionarioId);
 
             _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeServicoAsync(It.Is<string>(
                 _1 => _1 == FuncionarioResources.FuncionarioNaoExiste

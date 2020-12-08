@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OnboardingSIGDB1.Domain.Test._Builders
+﻿namespace OnboardingSIGDB1.Domain.Test._Builders
 {
     public abstract class BuilderBase
     {
@@ -23,10 +21,10 @@ namespace OnboardingSIGDB1.Domain.Test._Builders
             Atribuir(id, "Id", entidade);
         }
 
-        private void Atribuir(object valor, string propriedade, object entidade)
+        protected void Atribuir(object valor, string propriedade, object entidade)
         {
             var propertyInfo = entidade.GetType().GetProperty(propriedade);
-            propertyInfo.SetValue(entidade, Convert.ChangeType(valor, propertyInfo.PropertyType), null);
+            propertyInfo.SetValue(entidade, valor, null);
         }
     }
 }
