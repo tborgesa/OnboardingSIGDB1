@@ -96,12 +96,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
             Assert.False(funcionario.Validar());
         }
 
-        [Theory]
-        [InlineData("883.208.113-09")]
-        [InlineData("138.645.552-05")]
-        [InlineData("774.990.927-39")]
-        [InlineData("242.263.511-34")]
-        [InlineData("384.130.511-34")]
+        [Theory, ClassData(typeof(GeradorDeCpfValido))]
         public void DeveAceitarCpfValidos(string cpfValido)
         {
             var funcionario = FuncionarioBuilder.Novo().ComCpf(cpfValido).Build();

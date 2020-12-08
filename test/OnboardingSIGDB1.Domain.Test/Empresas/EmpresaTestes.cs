@@ -96,12 +96,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
             Assert.False(empresa.Validar());
         }
 
-        [Theory]
-        [InlineData("24.549.254/0001-21")]
-        [InlineData("96.526.324/0001-37")]
-        [InlineData("72.123.715/0001-42")]
-        [InlineData("74.644.941/0001-02")]
-        [InlineData("46.811.626/0001-89")]
+        [Theory, ClassData(typeof(GeradorDeCnpjValido))]
         public void DeveAceitarCnpjValidos(string cnpjValido)
         {
             var empresa = EmpresaBuilder.Novo().ComCnpj(cnpjValido).Build();
@@ -122,6 +117,5 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
 
             Assert.False(empresa.Validar());
         }
-
     }
 }
