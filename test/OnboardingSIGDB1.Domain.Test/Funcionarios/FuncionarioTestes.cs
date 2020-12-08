@@ -37,6 +37,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
         [Theory]
         [InlineData("")]
+        [InlineData(" ")]
         [InlineData(null)]
         public void NaoDeveAceitarNomeNuloOuVazio(string nome)
         {
@@ -47,6 +48,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
         [Theory]
         [InlineData("")]
+        [InlineData(" ")]
         [InlineData(null)]
         public void NaoDeveAceitarCpfNuloOuVazio(string cpf)
         {

@@ -29,6 +29,7 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
 
         [Theory]
         [InlineData("")]
+        [InlineData(" ")]
         [InlineData(null)]
         public void NaoDeveAceitarDescricaoNuloOuVazio(string descricao)
         {

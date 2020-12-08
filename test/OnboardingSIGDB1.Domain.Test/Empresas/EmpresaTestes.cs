@@ -37,6 +37,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
 
         [Theory]
         [InlineData("")]
+        [InlineData(" ")]
         [InlineData(null)]
         public void NaoDeveAceitarNomeNuloOuVazio(string nome)
         {
@@ -47,6 +48,7 @@ namespace OnboardingSIGDB1.Domain.Test.Empresas
 
         [Theory]
         [InlineData("")]
+        [InlineData(" ")]
         [InlineData(null)]
         public void NaoDeveAceitarCnpjNuloOuVazio(string cnpj)
         {
