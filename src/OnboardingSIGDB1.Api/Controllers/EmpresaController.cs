@@ -14,12 +14,15 @@ namespace OnboardingSIGDB1.Api.Controllers
     {
         private readonly IArmazenadorDeEmpresa _armazenadorDeEmpresa;
         private readonly IEmpresaRepositorio _empresaRepositorio;
+        private readonly IExclusaoDeEmpresa _exclusaoDeEmpresa;
 
         public EmpresaController(IArmazenadorDeEmpresa armazenadorDeEmpresa,
-            IEmpresaRepositorio empresaRepositorio)
+            IEmpresaRepositorio empresaRepositorio, 
+            IExclusaoDeEmpresa exclusaoDeEmpresa)
         {
             _armazenadorDeEmpresa = armazenadorDeEmpresa;
             _empresaRepositorio = empresaRepositorio;
+            _exclusaoDeEmpresa = exclusaoDeEmpresa;
         }
 
         [HttpPost("ObterComFiltro")]
@@ -65,7 +68,8 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await Task.CompletedTask;
+            await _exclusaoDeEmpresa.ExcluirAsync(id);
+
             return Ok();
         }
     }

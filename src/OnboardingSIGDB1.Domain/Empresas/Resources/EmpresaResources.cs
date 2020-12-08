@@ -8,6 +8,8 @@ namespace OnboardingSIGDB1.Domain.Empresas.Resources
         public const string Empresa = "Empresa";
         public const string Cnpj = "CNPJ";
 
+        public const string ExisteFuncionarioVinculadoNaEmpresa = "Esta empresa não pode ser excluída, pois existe funcionário vinculado.";
+
         public static string EmpresaNaoExiste => Resource.FormatarResource(
                              Resource.MensagemNaoExisteNoBancoDeDadosFeminino, Empresa);
     }

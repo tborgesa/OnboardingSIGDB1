@@ -1,7 +1,9 @@
 ﻿using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Empresas.Entidades;
+using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using OnboardingSIGDB1.Domain.Test._Comum;
 using System;
+using System.Collections.Generic;
 
 namespace OnboardingSIGDB1.Domain.Test._Builders
 {
@@ -11,6 +13,7 @@ namespace OnboardingSIGDB1.Domain.Test._Builders
         private static string _nome;
         private static string _cnpj;
         private static DateTime? _dataDeFundacao;
+        private static List<Funcionario> _listaDeFuncionarios;
 
         public static EmpresaBuilder Novo()
         {
@@ -47,13 +50,26 @@ namespace OnboardingSIGDB1.Domain.Test._Builders
             return this;
         }
 
+        public EmpresaBuilder ComFuncionario(Funcionario funcionario)
+        {
+            _listaDeFuncionarios = _listaDeFuncionarios ?? new List<Funcionario>();
+            _listaDeFuncionarios.Add(funcionario);
+            return this;
+        }
+
         public Empresa Build()
         {
             var empresa = new Empresa(_nome, _cnpj, _dataDeFundacao);
 
             AtribuirId(_id, empresa);
-
+            AtribuirFuncionario(empresa);
             return empresa;
+        }
+
+        private void AtribuirFuncionario(Empresa empresa)
+        {
+            if (_listaDeFuncionarios == null) return;
+            Atribuir(_listaDeFuncionarios, "ListaDeFuncionarios", empresa);
         }
     }
 }

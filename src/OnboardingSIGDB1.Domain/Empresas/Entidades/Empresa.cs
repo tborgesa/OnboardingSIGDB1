@@ -22,6 +22,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
             Nome = nome;
             Cnpj = cnpj.RemoverMascaraDoCnpj();
             DataDeFundacao = dataDeFundacao;
+            ListaDeFuncionarios = new List<Funcionario>();
         }
 
         public void AlterarNome(string nome)
