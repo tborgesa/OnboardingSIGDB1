@@ -14,12 +14,15 @@ namespace OnboardingSIGDB1.Api.Controllers
     {
         private readonly IArmazenadorDeCargo _armazenadorDeCargo;
         private readonly ICargoRepositorio _cargoRepositorio;
+        private readonly IExclusaoDeCargo _exclusaoDeCargo;
 
         public CargoController(IArmazenadorDeCargo armazenadorDeCargo,
-            ICargoRepositorio cargoRepositorio)
+            ICargoRepositorio cargoRepositorio, 
+            IExclusaoDeCargo exclusaoDeCargo)
         {
             _armazenadorDeCargo = armazenadorDeCargo;
             _cargoRepositorio = cargoRepositorio;
+            _exclusaoDeCargo = exclusaoDeCargo;
         }
 
         [HttpPost("ObterComFiltro")]
@@ -63,7 +66,8 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await Task.CompletedTask;
+            await _exclusaoDeCargo.ExcluirAsync(id);
+
             return Ok();
         }
     }

@@ -3,6 +3,7 @@ using OnboardingSIGDB1.Domain._Base.Interfaces;
 using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain.Cargos.Dto;
 using OnboardingSIGDB1.Domain.Cargos.Interfaces;
+using OnboardingSIGDB1.Domain.Cargos.Resources;
 using OnboardingSIGDB1.Domain.Cargos.Services;
 using OnboardingSIGDB1.Domain.Test._Builders;
 using OnboardingSIGDB1.Domain.Test._Comum;
@@ -62,7 +63,8 @@ namespace OnboardingSIGDB1.Domain.Test.Cargos
 
             await _editarUmCargo.EditarAsync(_cargoDto);
 
-            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.IsAny<string>()));
+            _notificacaoDeDominioMock.Verify(_ => _.HandleNotificacaoDeDominioAsync(It.Is<string>(
+                _1 => _1 == CargoResources.CargoNaoExiste)));
         }
     }
 }

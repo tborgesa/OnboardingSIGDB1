@@ -1,5 +1,4 @@
 ﻿using OnboardingSIGDB1.Domain._Base.Interfaces;
-using OnboardingSIGDB1.Domain._Base.Resources;
 using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Cargos.Dto;
 using OnboardingSIGDB1.Domain.Cargos.Entidades;
@@ -24,10 +23,7 @@ namespace OnboardingSIGDB1.Domain.Cargos.Services
             var cargo = await _cargoRepositorio.ObterPorIdAsync(cargoDto.Id);
 
             if (cargo == null)
-                await NotificacaoDeDominio.HandleNotificacaoDeDominioAsync(
-                         Resource.FormatarResource(
-                             Resource.MensagemNaoExisteNoBancoDeDadosMasculino, CargoResources.Cargo)
-                         );
+                await NotificacaoDeDominio.HandleNotificacaoDeDominioAsync(CargoResources.CargoNaoExiste);
 
             cargo?.AlterarDescricao(cargoDto.Descricao);
 
