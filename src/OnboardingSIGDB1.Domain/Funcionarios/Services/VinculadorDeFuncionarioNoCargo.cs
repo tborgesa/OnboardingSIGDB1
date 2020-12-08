@@ -2,8 +2,8 @@
 using OnboardingSIGDB1.Domain._Base.Services;
 using OnboardingSIGDB1.Domain.Cargos.Interfaces;
 using OnboardingSIGDB1.Domain.Funcionarios.Dto;
+using OnboardingSIGDB1.Domain.Funcionarios.Entidades;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
-using System;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Domain.Funcionarios.Services
@@ -22,9 +22,21 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Services
             _cargoRepositorio = cargoRepositorio;
         }
 
-        public Task Vincular(CargoDoFuncionarioDto cargoDoFuncionarioDto)
+        public async Task Vincular(CargoDoFuncionarioDto cargoDoFuncionarioDto)
         {
-            throw new NotImplementedException();
+            var funcionario = await _funcionarioRepositorio.ObterPorIdAsync(cargoDoFuncionarioDto.FuncionarioId);
+
+            var cargo = await _cargoRepositorio.ObterPorIdAsync(cargoDoFuncionarioDto.CargoId);
+
+            var cargoDoFuncionario = new CargoDoFuncionario(funcionario, cargo, cargoDoFuncionarioDto.DataDeVinculo);
+
+            if (!cargoDoFuncionario.Validar())
+            {
+                await NotificarValidacoesDeDominioAsync(cargoDoFuncionario.ValidationResult);
+                return;
+            }
+
+            await _funcionarioRepositorio.AdicionarCargoParaFuncionarioAsync(cargoDoFuncionario);
         }
     }
 }

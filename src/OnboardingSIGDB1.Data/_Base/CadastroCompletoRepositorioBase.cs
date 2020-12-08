@@ -16,9 +16,10 @@ namespace OnboardingSIGDB1.Data._Base
         where TEntidade : Entidade<TId, TEntidade>
     {
         public readonly DbSet<TEntidade> DbSet;
-
+        public readonly DbContext Context;
         public CadastroCompletoRepositorioBase(DbContext context)
         {
+            Context = context;
             DbSet = context.Set<TEntidade>();
         }
 

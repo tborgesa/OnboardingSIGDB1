@@ -9,7 +9,7 @@ namespace OnboardingSIGDB1.Domain.Cargos.Entidades
     public class Cargo : Entidade<int, Cargo>
     {
         public string Descricao { get; private set; }
-        public List<CargoDoFuncionario> ListaDeFuncionarios { get; private set; }
+        public virtual List<CargoDoFuncionario> ListaDeFuncionarios { get; private set; }
 
         public Cargo(string descricao)
         {

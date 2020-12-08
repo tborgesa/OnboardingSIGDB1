@@ -32,6 +32,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
 
         public VinculadorDeFuncionarioNoCargoTestes()
         {
+            _onboardingSIGDB1faker = OnboardingSIGDB1FakerBuilder.Novo().Build();
             _funcionarioId = _onboardingSIGDB1faker.Id();
             _cargoId = _onboardingSIGDB1faker.Id();
 
@@ -62,7 +63,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         public async Task DeveVincularFuncionarioNoCargo()
         {
             _funcionarioRepositorioMock.
-                Setup(_ => _.ObterFuncionariosComEmpresaECargosAsync(_cargoDoFuncionarioDto.FuncionarioId)).
+                Setup(_ => _.ObterPorIdAsync(_cargoDoFuncionarioDto.FuncionarioId)).
                 ReturnsAsync(_funcionario);
 
             _cargoRepositorioMock.
@@ -94,7 +95,7 @@ namespace OnboardingSIGDB1.Domain.Test.Funcionarios
         public async Task QuandoCargoNaoExisteDeveNotificarErroDeDominio()
         {
             _funcionarioRepositorioMock.
-                Setup(_ => _.ObterFuncionariosComEmpresaECargosAsync(_cargoDoFuncionarioDto.FuncionarioId)).
+                Setup(_ => _.ObterPorIdAsync(_cargoDoFuncionarioDto.FuncionarioId)).
                 ReturnsAsync(_funcionario);
 
             await _vinculadorDeFuncionarioNoCargo.Vincular(_cargoDoFuncionarioDto);

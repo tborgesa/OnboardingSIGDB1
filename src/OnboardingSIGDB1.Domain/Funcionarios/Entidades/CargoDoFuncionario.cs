@@ -11,14 +11,14 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
     public class CargoDoFuncionario : Entidade<int, CargoDoFuncionario>
     {
         public int FuncionarioId { get; private set; }
-        public Funcionario Funcionario { get; private set; }
+        public virtual Funcionario Funcionario { get; private set; }
 
         public int CargoId { get; private set; }
-        public Cargo Cargo { get; private set; }
+        public virtual Cargo Cargo { get; private set; }
 
         public DateTime DataDeVinculo { get; private set; }
 
-        private CargoDoFuncionario() { }
+        protected CargoDoFuncionario() { }
 
         public CargoDoFuncionario(Funcionario funcionario, Cargo cargo, DateTime dataDeVinculo)
         {

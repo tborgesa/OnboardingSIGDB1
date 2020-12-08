@@ -15,7 +15,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
         public string Cnpj { get; private set; }
         public DateTime? DataDeFundacao { get; private set; }
 
-        public List<Funcionario> ListaDeFuncionarios { get; private set; }
+        public virtual List<Funcionario> ListaDeFuncionarios { get; private set; }
 
         public Empresa(string nome, string cnpj, DateTime? dataDeFundacao)
         {
