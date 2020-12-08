@@ -35,7 +35,7 @@ namespace OnboardingSIGDB1.Domain.Empresas.Entidades
             Cnpj = cnpj.RemoverMascaraDoCnpj();
         }
 
-        public void AlterarDataDeFundacao(DateTime dataDeFundacao)
+        public void AlterarDataDeFundacao(DateTime? dataDeFundacao)
         {
             DataDeFundacao = dataDeFundacao;
         }

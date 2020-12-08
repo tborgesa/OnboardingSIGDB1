@@ -34,14 +34,14 @@ namespace OnboardingSIGDB1.Api.Controllers
         [HttpPost("ObterComFiltro")]
         public async Task<IActionResult> ObterComFiltro(FuncionarioFiltro funcionarioFiltro)
         {
-            var funcionarios = await _funcionarioRepositorio.BuscarAsync(ObterOsFuncionariosSpecification.
+            var listaDeFuncionariosComEmpresaECargo = await _funcionarioRepositorio.ObterComFiltroAsync(ObterOsFuncionariosSpecification.
                 Novo().
                 ComNome(funcionarioFiltro.Nome).
                 ComCpf(funcionarioFiltro.Cpf).
                 ComIntervaloDeDataDeContratacao(funcionarioFiltro.DataDeContratacaoInicial, funcionarioFiltro.DataDeContratacaoFinal).
                 Build());
 
-            return Ok(funcionarios.MapTo<List<FuncionarioDto>>());
+            return Ok(listaDeFuncionariosComEmpresaECargo);
         }
 
         [HttpGet("{id}")]

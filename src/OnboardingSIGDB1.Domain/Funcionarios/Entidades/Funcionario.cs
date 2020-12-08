@@ -73,7 +73,7 @@ namespace OnboardingSIGDB1.Domain.Funcionarios.Entidades
             Cpf = cpf.RemoverMascaraDoCpf();
         }
 
-        public void AlterarDataDeContratacao(DateTime dataDeContratacao)
+        public void AlterarDataDeContratacao(DateTime? dataDeContratacao)
         {
             DataDeContratacao = dataDeContratacao;
         }
