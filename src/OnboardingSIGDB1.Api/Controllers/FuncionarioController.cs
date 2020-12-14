@@ -5,7 +5,6 @@ using OnboardingSIGDB1.Domain.Funcionarios.Dto;
 using OnboardingSIGDB1.Domain.Funcionarios.Interfaces;
 using OnboardingSIGDB1.Domain.Funcionarios.Specifications;
 using OnboardingSIGDB1.IOC.AutoMapper.Extensions;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnboardingSIGDB1.Api.Controllers
@@ -31,8 +30,8 @@ namespace OnboardingSIGDB1.Api.Controllers
             _exclusaoDeFuncionario = exclusaoDeFuncionario;
         }
 
-        [HttpPost("ObterComFiltro")]
-        public async Task<IActionResult> ObterComFiltro(FuncionarioFiltro funcionarioFiltro)
+        [HttpGet]
+        public async Task<IActionResult> Get(FuncionarioFiltro funcionarioFiltro)
         {
             var listaDeFuncionariosComEmpresaECargo = await _funcionarioRepositorio.ObterComFiltroAsync(ObterOsFuncionariosSpecification.
                 Novo().

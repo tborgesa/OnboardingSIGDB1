@@ -15,7 +15,7 @@ namespace OnboardingSIGDB1.Api.Controllers
         private readonly IArmazenadorDeCargo _armazenadorDeCargo;
         private readonly ICargoRepositorio _cargoRepositorio;
         private readonly IExclusaoDeCargo _exclusaoDeCargo;
-
+        
         public CargoController(IArmazenadorDeCargo armazenadorDeCargo,
             ICargoRepositorio cargoRepositorio, 
             IExclusaoDeCargo exclusaoDeCargo)
@@ -25,8 +25,8 @@ namespace OnboardingSIGDB1.Api.Controllers
             _exclusaoDeCargo = exclusaoDeCargo;
         }
 
-        [HttpPost("ObterComFiltro")]
-        public async Task<IActionResult> ObterComFiltro(CargoFiltro cargoFiltro)
+        [HttpGet]
+        public async Task<IActionResult> Get(CargoFiltro cargoFiltro)
         {
             var cargos = await _cargoRepositorio.BuscarAsync(ObterOsCargosSpecification.Novo().
                 ComDescricao(cargoFiltro.Descricao)

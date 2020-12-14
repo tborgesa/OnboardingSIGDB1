@@ -24,6 +24,8 @@ namespace OnboardingSIGDB1.Api._Base.Extensions
                             Url = new Uri("https://github.com/tborgesa")
                         }
                     });
+
+                c.CustomSchemaIds(_ => _.FullName);
             });
         }
 

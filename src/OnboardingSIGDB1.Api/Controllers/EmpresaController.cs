@@ -25,8 +25,8 @@ namespace OnboardingSIGDB1.Api.Controllers
             _exclusaoDeEmpresa = exclusaoDeEmpresa;
         }
 
-        [HttpPost("ObterComFiltro")]
-        public async Task<IActionResult> ObterComFiltro(EmpresaFiltro empresaFiltro)
+        [HttpGet]
+        public async Task<IActionResult> Get(EmpresaFiltro empresaFiltro)
         {
             var empresas = await _empresaRepositorio.BuscarAsync(ObterAsEmpresasSpecification.Novo().
                 ComNome(empresaFiltro.Nome).

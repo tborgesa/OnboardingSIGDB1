@@ -3,7 +3,7 @@
 namespace OnboardingSIGDB1.Api._Base.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [Produces("application/json")]
     public class OnboardingSIGDB1Controller : ControllerBase
     {
     }
